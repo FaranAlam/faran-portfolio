@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://faran-portfolio.netlify.app/sitemap.xml
