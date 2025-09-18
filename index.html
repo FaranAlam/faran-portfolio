@@ -4,12 +4,21 @@
 <!-- Mirrored from preview.colorlib.com/theme/knuford/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Dec 2023 16:44:10 GMT -->
 
 <head>
-    <title>Faran</title>
-    <!-- Logo (favicon) add karne ka tag -->
+    <title>Faran | Web Designer & Developer</title> <!-- Logo (favicon) add karne ka tag -->
     <link rel="icon" type="image/jpg" href="images/logo1.jpg">
     <link rel="stylesheet" href="css/style.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="Faran - Professional Web Designer & Full Stack Developer. Providing reliable web development services including landing pages, portfolios, and full applications.">
+    <meta name="keywords" content="Web Developer, Full Stack, Portfolio, HTML CSS JS, React, Node.js">
+    <meta name="author" content="Faran">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Faran | Web Designer & Developer">
+    <meta property="og:description" content="Professional Full Stack Web Developer. Hire me for your next project.">
+    <meta property="og:image" content="https://yourdomain.com/images/preview.jpg">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta name="twitter:card" content="summary_large_image">
 
     <link rel="stylesheet" href="contact.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -26,6 +35,7 @@
     <link rel="stylesheet" href="css/aos.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/contactform.css">
+    <link rel="icon" type="image/png" href="images/logo1.jpg">
     <script
         nonce="4ddf0da1-f60a-45d3-b284-87486e7b3bfa">(function (w, d) { !function (j, k, l, m) { j[l] = j[l] || {}; j[l].executed = []; j.zaraz = { deferred: [], listeners: [] }; j.zaraz.q = []; j.zaraz._f = function (n) { return async function () { var o = Array.prototype.slice.call(arguments); j.zaraz.q.push({ m: n, a: o }) } }; for (const p of ["track", "set", "debug"]) j.zaraz[p] = j.zaraz._f(p); j.zaraz.init = () => { var q = k.getElementsByTagName(m)[0], r = k.createElement(m), s = k.getElementsByTagName("title")[0]; s && (j[l].t = k.getElementsByTagName("title")[0].text); j[l].x = Math.random(); j[l].w = j.screen.width; j[l].h = j.screen.height; j[l].j = j.innerHeight; j[l].e = j.innerWidth; j[l].l = j.location.href; j[l].r = k.referrer; j[l].k = j.screen.colorDepth; j[l].n = k.characterSet; j[l].o = (new Date).getTimezoneOffset(); if (j.dataLayer) for (const w of Object.entries(Object.entries(dataLayer).reduce(((x, y) => ({ ...x[1], ...y[1] })), {}))) zaraz.set(w[0], w[1], { scope: "page" }); j[l].q = []; for (; j.zaraz.q.length;) { const z = j.zaraz.q.shift(); j[l].q.push(z) } r.defer = !0; for (const A of [localStorage, sessionStorage]) Object.keys(A || {}).filter((C => C.startsWith("_zaraz_"))).forEach((B => { try { j[l]["z_" + B.slice(7)] = JSON.parse(A.getItem(B)) } catch { j[l]["z_" + B.slice(7)] = A.getItem(B) } })); r.referrerPolicy = "origin"; r.src = "../../cdn-cgi/zaraz/sd0d9.js?z=" + btoa(encodeURIComponent(JSON.stringify(j[l]))); q.parentNode.insertBefore(r, q) };["complete", "interactive"].includes(k.readyState) ? zaraz.init() : j.addEventListener("DOMContentLoaded", zaraz.init) }(w, d, "zarazData", "script"); })(window, document);</script>
     <script src="js/contactform.js"></script>
@@ -1204,51 +1214,6 @@
                 top: 0,
                 behavior: "smooth"
             });
-        });
-
-        const form = document.getElementById("newsletterForm");
-        const notification = document.getElementById("notification");
-
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const formData = new FormData(form);
-            const email = formData.get("email");
-
-            try {
-                const res = await fetch("http://localhost:5000/subscribe", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ email })
-                });
-
-                const data = await res.json();
-
-                // Reset classes
-                notification.className = "notification";
-
-                // Add type class
-                if (res.ok) {
-                    notification.classList.add("success");
-                } else {
-                    notification.classList.add("error");
-                }
-
-                notification.innerText = data.message;
-                notification.classList.add("show");
-
-                setTimeout(() => {
-                    notification.classList.remove("show");
-                }, 3000);
-
-                form.reset();
-            } catch (err) {
-                notification.className = "notification error";
-                notification.innerText = "⚠️ Something went wrong!";
-                notification.classList.add("show");
-                setTimeout(() => {
-                    notification.classList.remove("show");
-                }, 3000);
-            }
         });
 
         const form = document.getElementById("contactForm");
