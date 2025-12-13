@@ -4527,3 +4527,86 @@
             color: #fff;
             background: black;
         }
+
+    /* --- Mobile responsiveness fixes --- */
+    img, video {
+        max-width: 100%;
+        height: auto;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    @media (max-width: 991.98px) {
+        .container,
+        .container-xl,
+        .container-lg,
+        .container-md {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .navbar-brand-text {
+            font-size: 16px;
+        }
+
+        .navbar-logo {
+            width: 40px;
+            height: 40px;
+        }
+
+        .navbar-nav .nav-link {
+            padding: 0.35rem 0;
+            text-align: left;
+        }
+
+        .hero-wrap {
+            text-align: center;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .hero-wrap .text h1 {
+            font-size: 32px;
+            line-height: 1.2;
+        }
+
+        .hero-wrap .text p {
+            font-size: 16px;
+        }
+
+        .hero-wrap .btn {
+            margin-top: 0.5rem;
+        }
+
+        .ftco-section {
+            padding: 3rem 0;
+        }
+
+        .img-about {
+            height: 260px;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .blog-entry,
+        .pricing-entry,
+        .services .services-2 {
+            margin-bottom: 24px;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .hero-wrap .text h1 {
+            font-size: 28px;
+        }
+
+        .navbar-brand-text {
+            display: none;
+        }
+
+        .navbar-logo {
+            margin-right: 0;
+        }
+    }
