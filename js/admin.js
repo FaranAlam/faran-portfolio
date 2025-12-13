@@ -177,7 +177,7 @@ class AdminPanel {
     }
 
     loadMessages() {
-        fetch('http://localhost:5000/messages')
+        fetch('https://faranalam-backend-portfolio.onrender.com/messages')
             .then(response => response.json())
             .then(data => {
                 if (Array.isArray(data)) {
@@ -203,7 +203,7 @@ class AdminPanel {
 
     loadSubscribers() {
         // Try to load from server first (database)
-        fetch('http://localhost:5000/subscribers')
+        fetch('https://faranalam-backend-portfolio.onrender.com/subscribers')
             .then(response => response.json())
             .then(data => {
                 if (Array.isArray(data)) {
@@ -402,7 +402,7 @@ class AdminPanel {
         if (confirm('Are you sure you want to remove this subscriber?')) {
             // Try to delete from database first
             if (subscriber._id) {
-                fetch(`http://localhost:5000/subscribers/${subscriber._id}`, {
+                fetch(`https://faranalam-backend-portfolio.onrender.com/subscribers/${subscriber._id}`, {
                     method: 'DELETE'
                 })
                 .then(() => {
@@ -436,7 +436,7 @@ class AdminPanel {
         if (confirm('Are you sure you want to delete this message?')) {
             // Try to delete from database first
             if (message._id) {
-                fetch(`http://localhost:5000/messages/${message._id}`, {
+                fetch(`https://faranalam-backend-portfolio.onrender.com/messages/${message._id}`, {
                     method: 'DELETE'
                 })
                 .then(() => {
