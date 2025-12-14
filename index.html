@@ -1148,91 +1148,113 @@
     <div id="notification" class="notification"></div>
 
     <section class="ftco-section ftco-no-pb" id="contactme">
-        <div class="container">
-            <div class="row justify-content-center mb-5">
-                <div class="col-md-8 text-center heading-section">
-                    <h2 class="mb-3" style="font-size: 36px; font-weight: 700;">Get In Touch</h2>
-                </div>
+        <div class="map-area section-padding40">
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26565.285165300655!2d73.0134315371998!3d33.665953912285055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38df95906a03cfff%3A0x2b2f1c1c99b676ce!2sInternational%20Islamic%20University%20Islamabad%20(IIUI)!5e0!3m2!1sen!2s!4v1701883639010!5m2!1sen!2s"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
-
-            <div class="row">
-                <!-- Left Side - Contact Info -->
-                <div class="col-lg-4 col-md-12 mb-4">
-                    <div class="contact-info-simple">
-                        <div class="info-item-simple">
-                            <div class="icon-circle">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="info-text">
-                                <h5>Location</h5>
-                                <p>IIUI, H10, Islamabad, Pakistan</p>
-                            </div>
-                        </div>
-
-                        <div class="info-item-simple">
-                            <div class="icon-circle">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="info-text">
-                                <h5>Email</h5>
-                                <p><a href="mailto:faranalam14203@gmail.com">faranalam14203@gmail.com</a></p>
+        </div>
+        <div class="container-fluid-xl">
+            <div class="row no-gutters justify-content-center">
+                <div class="contact-wrap w-100 p-md-5 p-4">
+                    <h3>Contact us</h3>
+                    <p class="mb-4">We're open for any suggestion or just to have a chat</p>
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <div class="dbox w-100 d-flex align-items-start">
+                                <div class="text">
+                                    <p>
+                                        <span>My Address:</span>
+                                        <a href="https://maps.google.com/?q=International+Islamic+University+Islamabad" target="_blank">
+                                            International Islamic University Islamabad (IIUI), H10, Islamabad,
+                                            44000,
+                                            Pakistan
+                                        </a>
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="info-item-simple">
-                            <div class="icon-circle">
-                                <i class="fas fa-phone-alt"></i>
-                            </div>
-                            <div class="info-text">
-                                <h5>Phone</h5>
-                                <p><a href="https://wa.me/923334051830">+92 333 405 1830</a></p>
+                        <div class="col-md-4">
+                            <div class="dbox w-100 d-flex align-items-start">
+                                <div class="text">
+                                    <p>
+                                        <span>My Email:</span>
+                                        <a href="mailto:faranalam14203@gmail.com" target="_blank">
+                                            faranalam14203@gmail.com
+                                        </a>
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Social Media Links -->
-                        <div class="social-media-links mt-4">
-                            <a href="https://www.facebook.com/share/1DcVGX8JVb/" target="_blank" rel="noopener noreferrer" class="social-link-icon facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="https://x.com/FaranAlam11?t=fS_Ril9o-g_LYgzJQ36dXA&s=08" target="_blank" rel="noopener noreferrer" class="social-link-icon twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="https://www.instagram.com/faranalam42?igsh=aTBqbGRsOW5yeGM4" target="_blank" rel="noopener noreferrer" class="social-link-icon instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/faran-alam-14203abc" target="_blank" rel="noopener noreferrer" class="social-link-icon linkedin">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
+                        <div class="col-md-4">
+                            <div class="dbox w-100 d-flex align-items-start">
+                                <div class="text">
+                                    <p>
+                                        <span>My Phone:</span>
+                                        <a href="https://wa.me/923334051830" target="_blank">
+                                            0333 405 1830
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="contactForm" class="contactForm" action="http://localhost:5000/contact" method="POST">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Name" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea name="message" class="form-control" id="message" cols="30" rows="4" placeholder="Create a message here" required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="submit" value="Send Message" class="btn btn-primary">
+                                    <div class="submitting"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Notification -->
+                    <div id="formNotification" class="notification"></div>
+
+                    <div class="social-media mt-5">
+                        <h3>Follow Me</h3>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/faran.alam.5243?mibextid=ZbWKwL" target="_blank" class="facebook">Facebook</a>
+                            <a href="https://x.com/FaranAlam11?t=me5DYC4Y4LuYhi42fnub2g&s=09" target="_blank" class="twitter">Twitter</a>
+                            <a href="https://instagram.com/engineer_faran?igshid=YzAwZjE1ZTI0Zg==" target="_blank" class="instagram">Instagram</a>
+                            <a href="https://www.linkedin.com/in/faran-alam-231911271?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="linkedin">LinkedIn</a>
                         </div>
                     </div>
                 </div>
-
-                <!-- Right Side - Contact Form -->
-                <div class="col-lg-8 col-md-12">
-                    <div class="contact-form-simple">
-                        <form id="contactForm" class="contactForm">
-                            <div class="mb-3">
-                                <label class="form-label">Your Name</label>
-                                <input type="text" class="form-control" name="name" placeholder="Enter your name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Your Email</label>
-                                <input type="email" class="form-control" name="email" placeholder="Enter your email" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Subject</label>
-                                <input type="text" class="form-control" name="subject" placeholder="Enter subject" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Your Message</label>
-                                <textarea name="message" class="form-control" rows="5" placeholder="Enter your message" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Send Message</button>
-                        </form>
-                        <div id="formNotification" class="notification"></div>
-                    </div>
-                </div>
             </div>
+            <div class="col-lg-6 d-flex align-items-stretch">
+                <div id="map" class="bg-white"></div>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
         </div>
     </section>
     <section class="ftco-intro py-5 bg-primary">
@@ -1257,7 +1279,7 @@
     <!-- Back to Top Button -->
     <button id="backToTop"><i class="fa fa-arrow-up"></i></button>
     <!-- WhatsApp Floating Button -->
-    <a id="whatsappButton" href="https://wa.me/923334051830?text=Hello%20Faran" target="_blank" aria-label="Chat on WhatsApp">
+    <a id="whatsappButton" href="https://wa.me/923334051830" target="_blank" aria-label="Chat on WhatsApp">
         <i class="fa fa-whatsapp"></i>
     </a>
 
@@ -1321,9 +1343,9 @@
 
                         <!-- Social Media -->
                         <ul class="ftco-footer-social p-0">
-                            <li><a href="https://www.facebook.com/share/1DcVGX8JVb/" target="_blank" rel="noopener noreferrer" class="facebook" title="Follow on Facebook"><span class="fa fa-facebook"></span></a></li>
-                            <li><a href="https://x.com/FaranAlam11?t=fS_Ril9o-g_LYgzJQ36dXA&s=08" target="_blank" rel="noopener noreferrer" class="twitter" title="Follow on Twitter"><span class="fa fa-twitter"></span></a></li>
-                            <li><a href="https://www.linkedin.com/in/faran-alam-14203abc" target="_blank" rel="noopener noreferrer" class="linkedin" title="Connect on LinkedIn"><span class="fa fa-linkedin"></span></a></li>
+                            <li><a href="#" class="facebook"><span class="fa fa-facebook"></span></a></li>
+                            <li><a href="#" class="twitter"><span class="fa fa-twitter"></span></a></li>
+                            <li><a href="#" class="linkedin"><span class="fa fa-linkedin"></span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -1511,38 +1533,7 @@
                 behavior: "smooth"
             });
         });
-
-        // Auto-close mobile navbar when clicking nav links
-        document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                const navbarCollapse = document.getElementById('navbarSupportedContent');
-                if (navbarCollapse.classList.contains('show')) {
-                    const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
-                        toggle: true
-                    });
-                }
-            });
-        });
-
         // Contact form JS handled in js/contactform.js to avoid duplicates.
-
-        // FAQ Accordion Toggle
-        setTimeout(function() {
-            document.querySelectorAll('.faq-question').forEach((question, index) => {
-                question.addEventListener('click', function() {
-                    const item = this.closest('.faq-item');
-
-                    // Remove active from all
-                    document.querySelectorAll('.faq-item.active').forEach(el => {
-                        el.classList.remove('active');
-                    });
-
-                    // Add to this one
-                    item.classList.add('active');
-                    console.log('Item ' + index + ' OPENED - has active:', item.classList.contains('active'));
-                });
-            });
-        }, 100);
     </script>
 </body>
 

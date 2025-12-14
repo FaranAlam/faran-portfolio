@@ -9,6 +9,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import nodemailer from "nodemailer";
 import Subscriber from "./models/Subscriber.js";
+import ContactMessage from "./models/ContactMessage.js";
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -61,6 +62,52 @@ const transporter = createTransporter();
 
 app.get("/health", (_req, res) => {
     res.json({ status: "ok", db: mongoose.connection.readyState });
+});
+
+app.get("/subscribers", async (_req, res) => {
+    try {
+        const subscribers = await Subscriber.find().sort({ subscribedAt: -1 });
+        return res.json(subscribers);
+    } catch (err) {
+        console.error("Failed to fetch subscribers", err);
+        return res.status(500).json({ message: "Failed to fetch subscribers" });
+    }
+});
+
+app.get("/messages", async (_req, res) => {
+    try {
+        const messages = await ContactMessage.find().sort({ submittedAt: -1 });
+        return res.json(messages);
+    } catch (err) {
+        console.error("Failed to fetch messages", err);
+        return res.status(500).json({ message: "Failed to fetch messages" });
+    }
+});
+
+app.delete("/subscribers/:id", async (req, res) => {
+    try {
+        const result = await Subscriber.findByIdAndDelete(req.params.id);
+        if (!result) {
+            return res.status(404).json({ message: "Subscriber not found" });
+        }
+        return res.json({ message: "Subscriber deleted successfully" });
+    } catch (err) {
+        console.error("Failed to delete subscriber", err);
+        return res.status(500).json({ message: "Failed to delete subscriber" });
+    }
+});
+
+app.delete("/messages/:id", async (req, res) => {
+    try {
+        const result = await ContactMessage.findByIdAndDelete(req.params.id);
+        if (!result) {
+            return res.status(404).json({ message: "Message not found" });
+        }
+        return res.json({ message: "Message deleted successfully" });
+    } catch (err) {
+        console.error("Failed to delete message", err);
+        return res.status(500).json({ message: "Failed to delete message" });
+    }
 });
 
 app.get("/smtp-check", async (_req, res) => {
@@ -123,28 +170,37 @@ app.post("/contact", contactLimiter, async(req, res) => {
         return res.status(400).json({ message: "Message cannot be empty." });
     }
 
-    const mailOptions = {
-        from: process.env.SMTP_FROM || process.env.SMTP_USER,
-        to: CONTACT_TO || process.env.SMTP_USER,
-        replyTo: email,
-        subject: `${subject}`,
-        html: `<p><strong>Name:</strong> ${name || "(not provided)"}</p>
-           <p><strong>Email:</strong> ${email}</p>
-           <p><strong>Message:</strong></p>
-           <p>${message.replace(/\n/g, "<br>")}</p>`
-    };
-
-    if (!transporter) {
-        console.log("[Contact] SMTP not configured. Submission:", { name, email, subject, message });
-        return res.json({ message: "Message received. (Email service not configured.)" });
-    }
-
     try {
-        await transporter.sendMail(mailOptions);
-        return res.json({ message: "Message sent successfully!" });
+        // Save to database
+        await ContactMessage.create({ name, email, subject, message });
+        console.log("[Contact] Message saved to database:", { name, email, subject });
+
+        const mailOptions = {
+            from: process.env.SMTP_FROM || process.env.SMTP_USER,
+            to: CONTACT_TO || process.env.SMTP_USER,
+            replyTo: email,
+            subject: `${subject}`,
+            html: `<p><strong>Name:</strong> ${name || "(not provided)"}</p>
+               <p><strong>Email:</strong> ${email}</p>
+               <p><strong>Message:</strong></p>
+               <p>${message.replace(/\n/g, "<br>")}</p>`
+        };
+
+        if (!transporter) {
+            console.log("[Contact] SMTP not configured. Email service skipped.");
+            return res.json({ message: "Message received and saved!" });
+        }
+
+        try {
+            await transporter.sendMail(mailOptions);
+            return res.json({ message: "Message sent successfully!" });
+        } catch (err) {
+            console.error("Contact email failed", err.message);
+            return res.json({ message: "Message saved but email notification failed." });
+        }
     } catch (err) {
-        console.error("Contact email failed", err.message);
-        return res.status(500).json({ message: "Failed to send message." });
+        console.error("Failed to save contact message", err);
+        return res.status(500).json({ message: "Failed to save message." });
     }
 });
 
