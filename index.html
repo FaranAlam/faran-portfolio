@@ -1240,10 +1240,10 @@
                     <div class="social-media mt-5">
                         <h3>Follow Me</h3>
                         <div class="social-links">
-                            <a href="https://www.facebook.com/faran.alam.5243?mibextid=ZbWKwL" target="_blank" class="facebook">Facebook</a>
-                            <a href="https://x.com/FaranAlam11?t=me5DYC4Y4LuYhi42fnub2g&s=09" target="_blank" class="twitter">Twitter</a>
-                            <a href="https://instagram.com/engineer_faran?igshid=YzAwZjE1ZTI0Zg==" target="_blank" class="instagram">Instagram</a>
-                            <a href="https://www.linkedin.com/in/faran-alam-231911271?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="linkedin">LinkedIn</a>
+                            <a href="https://www.facebook.com/share/1DcVGX8JVb/" target="_blank" rel="noopener noreferrer" class="facebook">Facebook</a>
+                            <a href="https://x.com/FaranAlam11?t=fS_Ril9o-g_LYgzJQ36dXA&s=08" target="_blank" rel="noopener noreferrer" class="twitter">Twitter</a>
+                            <a href="https://www.instagram.com/faranalam42?igsh=aTBqbGRsOW5yeGM4" target="_blank" rel="noopener noreferrer" class="instagram">Instagram</a>
+                            <a href="https://www.linkedin.com/in/faran-alam-14203abc" target="_blank" rel="noopener noreferrer" class="linkedin">LinkedIn</a>
                         </div>
                     </div>
                 </div>
@@ -1279,7 +1279,7 @@
     <!-- Back to Top Button -->
     <button id="backToTop"><i class="fa fa-arrow-up"></i></button>
     <!-- WhatsApp Floating Button -->
-    <a id="whatsappButton" href="https://wa.me/923334051830" target="_blank" aria-label="Chat on WhatsApp">
+    <a id="whatsappButton" href="https://wa.me/923334051830?text=Hello%20Faran" target="_blank" aria-label="Chat on WhatsApp">
         <i class="fa fa-whatsapp"></i>
     </a>
 
@@ -1343,9 +1343,9 @@
 
                         <!-- Social Media -->
                         <ul class="ftco-footer-social p-0">
-                            <li><a href="#" class="facebook"><span class="fa fa-facebook"></span></a></li>
-                            <li><a href="#" class="twitter"><span class="fa fa-twitter"></span></a></li>
-                            <li><a href="#" class="linkedin"><span class="fa fa-linkedin"></span></a></li>
+                            <li><a href="https://www.facebook.com/share/1DcVGX8JVb/" target="_blank" rel="noopener noreferrer" class="facebook" title="Follow on Facebook"><span class="fa fa-facebook"></span></a></li>
+                            <li><a href="https://x.com/FaranAlam11?t=fS_Ril9o-g_LYgzJQ36dXA&s=08" target="_blank" rel="noopener noreferrer" class="twitter" title="Follow on Twitter"><span class="fa fa-twitter"></span></a></li>
+                            <li><a href="https://www.linkedin.com/in/faran-alam-14203abc" target="_blank" rel="noopener noreferrer" class="linkedin" title="Connect on LinkedIn"><span class="fa fa-linkedin"></span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -1533,7 +1533,38 @@
                 behavior: "smooth"
             });
         });
+
+        // Auto-close mobile navbar when clicking nav links
+        document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const navbarCollapse = document.getElementById('navbarSupportedContent');
+                if (navbarCollapse.classList.contains('show')) {
+                    const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                        toggle: true
+                    });
+                }
+            });
+        });
+
         // Contact form JS handled in js/contactform.js to avoid duplicates.
+
+        // FAQ Accordion Toggle
+        setTimeout(function() {
+            document.querySelectorAll('.faq-question').forEach((question, index) => {
+                question.addEventListener('click', function() {
+                    const item = this.closest('.faq-item');
+                    
+                    // Remove active from all
+                    document.querySelectorAll('.faq-item.active').forEach(el => {
+                        el.classList.remove('active');
+                    });
+                    
+                    // Add to this one
+                    item.classList.add('active');
+                    console.log('Item ' + index + ' OPENED - has active:', item.classList.contains('active'));
+                });
+            });
+        }, 100);
     </script>
 </body>
 

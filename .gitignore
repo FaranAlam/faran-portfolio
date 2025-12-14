@@ -1,6 +1,1 @@
 .qodo
-newsletter-app/.env
-newsletter-app/node_modules/
-node_modules/
-*.log
-newsletter-app/.gitignore
