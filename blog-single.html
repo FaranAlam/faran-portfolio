@@ -1,347 +1,722 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from preview.colorlib.com/theme/knuford/blog-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Dec 2023 16:45:58 GMT -->
-
 <head>
-  <title>Faran</title>
-  <!-- Logo (favicon) add karne ka tag -->
-  <link rel="icon" type="image/jpg" href="images/logo1.jpg">
-  <link rel="stylesheet" href="css/style.css">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Faran - Blog</title>
+    <link rel="icon" type="image/jpg" href="images/logo1.jpg">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Faran - Technical Blog. Read articles about web development, coding, and technology insights.">
+    <meta name="keywords" content="Blog, Web Development, JavaScript, React, Node.js, Technology">
 
-  <link rel="stylesheet" href="contact.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com/">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-  <link rel="stylesheet" href="css/animate.css">
-  <link rel="stylesheet" href="css/flaticon.css">
-  <link rel="stylesheet" href="css/tiny-slider.css">
-  <link rel="stylesheet" href="css/glightbox.min.css">
-  <link rel="stylesheet" href="css/aos.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/contactform.css">
-  <script
-    nonce="4ddf0da1-f60a-45d3-b284-87486e7b3bfa">(function (w, d) { !function (j, k, l, m) { j[l] = j[l] || {}; j[l].executed = []; j.zaraz = { deferred: [], listeners: [] }; j.zaraz.q = []; j.zaraz._f = function (n) { return async function () { var o = Array.prototype.slice.call(arguments); j.zaraz.q.push({ m: n, a: o }) } }; for (const p of ["track", "set", "debug"]) j.zaraz[p] = j.zaraz._f(p); j.zaraz.init = () => { var q = k.getElementsByTagName(m)[0], r = k.createElement(m), s = k.getElementsByTagName("title")[0]; s && (j[l].t = k.getElementsByTagName("title")[0].text); j[l].x = Math.random(); j[l].w = j.screen.width; j[l].h = j.screen.height; j[l].j = j.innerHeight; j[l].e = j.innerWidth; j[l].l = j.location.href; j[l].r = k.referrer; j[l].k = j.screen.colorDepth; j[l].n = k.characterSet; j[l].o = (new Date).getTimezoneOffset(); if (j.dataLayer) for (const w of Object.entries(Object.entries(dataLayer).reduce(((x, y) => ({ ...x[1], ...y[1] })), {}))) zaraz.set(w[0], w[1], { scope: "page" }); j[l].q = []; for (; j.zaraz.q.length;) { const z = j.zaraz.q.shift(); j[l].q.push(z) } r.defer = !0; for (const A of [localStorage, sessionStorage]) Object.keys(A || {}).filter((C => C.startsWith("_zaraz_"))).forEach((B => { try { j[l]["z_" + B.slice(7)] = JSON.parse(A.getItem(B)) } catch { j[l]["z_" + B.slice(7)] = A.getItem(B) } })); r.referrerPolicy = "origin"; r.src = "../../cdn-cgi/zaraz/sd0d9.js?z=" + btoa(encodeURIComponent(JSON.stringify(j[l]))); q.parentNode.insertBefore(r, q) };["complete", "interactive"].includes(k.readyState) ? zaraz.init() : j.addEventListener("DOMContentLoaded", zaraz.init) }(w, d, "zarazData", "script"); })(window, document);</script>
-  <script src="js/contactform.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f8f9fa;
+        }
+        /* Blog Hero */
+        
+        .blog-hero {
+            background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .blog-hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .blog-hero p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        /* Blog Controls */
+        
+        .blog-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .search-box input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        
+        .search-box button {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .filter-section {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #e9ecef;
+            background: white;
+            color: #333;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        /* Blog Grid */
+        
+        .blogs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .blog-card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .blog-card-content {
+            padding: 25px;
+        }
+        
+        .blog-card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .blog-card-category {
+            background: #007bff;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .blog-card-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .blog-card-title a {
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .blog-card-title a:hover {
+            color: #007bff;
+        }
+        
+        .blog-card-excerpt {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .blog-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .blog-card-info {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .blog-card-btn {
+            background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .blog-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        
+        .blog-tag {
+            background: #f0f0f0;
+            color: #007bff;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .blog-tag:hover {
+            background: #007bff;
+            color: white;
+        }
+        /* Loading */
+        
+        .loading {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        /* Pagination */
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 40px 0;
+        }
+        
+        .pagination button {
+            padding: 10px 15px;
+            border: 1px solid #e9ecef;
+            background: white;
+            color: #007bff;
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        
+        .pagination button.active {
+            background: #007bff;
+            color: white;
+        }
+        /* Blog Detail */
+        
+        .blog-detail-section {
+            background: #f8f9fa;
+            padding: 60px 20px;
+            display: none;
+        }
+        
+        .blog-detail-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .blog-detail-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .blog-detail-meta {
+            display: flex;
+            gap: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            margin-bottom: 30px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .blog-detail-category-badge {
+            background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .blog-detail-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+        
+        .blog-detail-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+        /* Comments */
+        
+        .comments-section {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+        }
+        
+        .comments-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+        
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .comment-form input,
+        .comment-form textarea {
+            padding: 12px 15px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .submit-comment-btn {
+            background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            align-self: flex-start;
+        }
+        
+        .comment-item {
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .comment-author {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .comment-date {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .blog-hero h1 {
+                font-size: 32px;
+            }
+            .blogs-grid {
+                grid-template-columns: 1fr;
+            }
+            .blog-detail-title {
+                font-size: 28px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <section class="hero-wrap hero-wrap-2" style="background-image: url('images/blog-page-bg.jfif');">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row no-gutters slider-text align-items-center justify-content-center">
-        <div class="col-md-9 pt-5 mt-5 text-center">
-          <p class="breadcrumbs"><span class="me-2"><a href="index.html">Home <i
-                  class="fa fa-chevron-right"></i></a></span> <span class="me-2"><a href="#">Blog <i
-                  class="fa fa-chevron-right"></i></a></span> <span>Blog Single <i
-                class="fa fa-chevron-right"></i></span></p>
-          <h1 class="mb-0 bread">Blog Details</h1>
+    <!-- Hero -->
+    <section class="blog-hero">
+        <div class="blog-container">
+            <h1>📚 My Blog</h1>
+            <p>Articles about web development, coding, and technology insights</p>
         </div>
-      </div>
-    </div>
-  </section>
-  <section class="ftco-section">
-    <div class="container">
-      <div class="row g-lg-5">
-        <div class="col-lg-12 blog-single">
-          <h2 class="mb-3">📌 International Islamic University Islamabad</h2>
-          <p>
-            The <strong>International Islamic University, Islamabad (IIUI)</strong> is one of Pakistan’s
-            leading institutions, known for its excellence in <em>Islamic studies, science,
-              technology, business, and social sciences</em>. It provides students with both modern
-            education and Islamic values in a balanced academic environment.
-          </p>
+    </section>
 
-          <p>
-            <img src="images/iiui.webp" alt="IIUI Campus" class="img-fluid">
-          </p>
-
-          <p>
-            IIUI has a beautiful and modern campus located in Sector H-10, Islamabad. The university
-            hosts thousands of students from across Pakistan and many other countries, promoting
-            <strong>diversity, research, and innovation</strong>.
-          </p>
-
-          <h2 class="mb-3 mt-5">🎓 Faculties & Programs</h2>
-          <p>
-            IIUI offers a wide range of programs, including:
-          </p>
-          <ul>
-            <li>Faculty of Engineering & Technology</li>
-            <li>Faculty of Management Sciences</li>
-            <li>Faculty of Islamic Studies</li>
-            <li>Faculty of Social Sciences</li>
-            <li>Faculty of Languages & Literature</li>
-          </ul>
-
-          <p>
-            <img src="images/WW.jpeg" alt="IIUI Library" class="img-fluid">
-          </p>
-
-          <p>
-            The university is also known for its <strong>Central Library</strong>, research centers,
-            and vibrant student societies that encourage creativity and leadership.
-          </p>
-
-          <div class="tag-widget post-tag-container mb-5 mt-5">
-            <div class="tagcloud">
-              <a href="#" class="tag-cloud-link">IIUI</a>
-              <a href="#" class="tag-cloud-link">Islamabad</a>
-              <a href="#" class="tag-cloud-link">Education</a>
-              <a href="#" class="tag-cloud-link">Engineering</a>
-            </div>
-          </div>
-        </div>
-        <div class="about-author d-flex p-4 bg-light rounded">
-          <div class="about-author d-flex p-4 bg-light rounded align-items-center">
-            <!-- Left Side Profile Image -->
-            <div class="author-pic me-md-4">
-              <img src="images/author-pic.jpg" alt="Faran Alam" class="img-fluid rounded-circle">
+    <!-- Grid Section -->
+    <section id="blogGridSection" style="display: none;">
+        <div class="blog-container">
+            <div class="blog-controls">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search blogs...">
+                    <button onclick="searchBlogs()"><i class="fas fa-search"></i> Search</button>
+                </div>
+                <div class="filter-section" id="filterSection"></div>
             </div>
 
-            <!-- Right Side Description -->
-            <div class="desc">
-              <h3>Faran Alam</h3>
-              <p>
-                I am a <strong>Computer Engineer</strong> and professional <strong>Full Stack Web Developer</strong>.
-                Currently working on modern web technologies including React, Node.js, Express, MongoDB,
-                and Laravel. Passionate about creating user-friendly and optimized web applications.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="pt-5 mt-5">
-          <h3 class="mb-5" style="font-size: 34px;">3 Comments</h3>
-          <ul class="comment-list">
-            <li class="comment">
-              <div class="vcard bio">
-                <img src="images/comment-pic (2).jpg" alt="Image placeholder">
-              </div>
-              <div class="comment-body">
-                <h3>Engr. Umer Hayat</h3>
-                <div class="meta">March 15, 2024 at 09:30am</div>
-                <p>Great blog post about IIUI 👏 Really helpful for new students!</p>
-                <p><a href="#" class="reply">Reply</a></p>
-              </div>
-            </li>
-
-            <li class="comment">
-              <div class="vcard bio">
-                <img src="images/comment-pic (1).jpg" alt="Image placeholder">
-              </div>
-              <div class="comment-body">
-                <h3>Engr. Khizar Abass</h3>
-                <div class="meta">March 16, 2024 at 02:15pm</div>
-                <p>I studied at IIUI – amazing faculty and environment. Thanks for sharing!</p>
-                <p><a href="#" class="reply">Reply</a></p>
-              </div>
-            </li>
-
-            <li class="comment">
-              <div class="vcard bio">
-                <img src="images/comment-pic (3).jpg" alt="Image placeholder">
-              </div>
-              <div class="comment-body">
-                <h3>Engr. Mohammad Khuzaifa</h3>
-                <div class="meta">March 18, 2024 at 07:45pm</div>
-                <p>Very informative content about IIUI. Keep writing more blogs 🙌</p>
-                <p><a href="#" class="reply">Reply</a></p>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="comment-form-wrap pt-5">
-          <h3 class="mb-5" style="font-size: 34px;">Leave a comment</h3>
-          <form action="#" class="p-4 p-lg-5 comment-form">
-            <form id="contactForm" class="contactForm" action="https://formspree.io/f/xjkvrlqg" method="POST">
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Name" required>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <textarea name="message" class="form-control" id="message" cols="30" rows="4"
-                      placeholder="Create a message here" required></textarea>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <input type="submit" value="Send Message" class="btn btn-primary">
-                    <div class="submitting"></div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </form>
-        </div>
-      </div>
-    </div>
-    </div>
-    </div>
-  </section>
-
-  <div style="text-align: center; margin-top: 40px;">
-    <a href="index.html" class="back-btn">⬅ Back to Home</a>
-  </div><br><br>
-
-  <section class="ftco-intro py-5 bg-primary">
-    <div class="container">
-      <div class="row d-flex justify-content-center">
-        <div class="col-lg-12">
-          <div class="row g-lg-5">
-            <div class="col-md-8 text-lg-right">
-              <h2 class="mb-0">Newsletter - Stay tune and get the latest update</h2>
-              <p>Let’s collaborate to bring your ideas to life. You can reach out through the contact on whatsApp or
-                email me directly.</p>
-            </div>
-            <div class="col-md-4 border-left d-flex align-items-center">
-              <form action="#" class="subscribe-form">
-                <div class="form-group d-flex align-items-center">
-                  <input type="text" class="form-control" placeholder="Enter email address">
-                  <a href="#" class="btn-icon me-2"><span class="fa fa-paper-plane"></span></a>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <footer class="ftco-footer">
-    <div class="container-xl">
-      <div class="row mb-5 justify-content-between">
-        <!-- Logo & About -->
-        <div class="col-md-6 col-lg-4">
-          <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2 logo d-flex">
-              <a class="navbar-brand align-items-center">Faran</a>
-            </h2>
-            <p>
-              I’m Faran, a Web Designer & Developer delivering reliable web solutions —
-              from landing pages to full e-commerce stores since 2022.
-            </p>
-
-          </div>
-        </div>
-
-        <!-- Services -->
-        <div class="col-md-6 col-lg-2">
-          <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Services</h2>
-            <ul class="list-unstyled">
-              <li><a href="#"><span class="fa fa-angle-right me-2"></span>Web Design</a></li>
-              <li><a href="#"><span class="fa fa-angle-right me-2"></span>Web Development</a></li>
-              <li><a href="#"><span class="fa fa-angle-right me-2"></span>Full Stack Development</a>
-              </li>
-              <li><a href="#"><span class="fa fa-angle-right me-2"></span>UI/UX Design</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Contact Info -->
-        <div class="col-md-6 col-lg-3">
-          <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Have a Question?</h2>
-            <div class="block-23 mb-3">
-              <ul>
-                <li>
-                  <a href="https://www.google.com/maps?q=International+Islamic+University+Islamabad+H10+Pakistan"
-                    target="_blank" style="text-decoration:none; color:inherit;">
-                    <span class="icon fa fa-map-marker"></span>
-                    <span class="text">International Islamic University Islamabad (IIUI), H10,
-                      Islamabad, Pakistan</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://wa.me/923334051830" target="_blank">
-                    <span class="icon fa fa-phone"></span>
-                    <span class="text">+92 333 4051830</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="mailto:faranalam14203@gmail.com">
-                    <span class="icon fa fa-envelope"></span>
-                    <span class="text">faranalam14203@gmail.com</span>
-                  </a>
-                </li>
-              </ul>
+            <div id="loadingState" style="text-align: center; padding: 60px 0;">
+                <div class="loading"></div>
             </div>
 
-            <!-- Social Media -->
-            <ul class="ftco-footer-social p-0">
-              <li><a href="#" class="facebook"><span class="fa fa-facebook"></span></a></li>
-              <li><a href="#" class="twitter"><span class="fa fa-twitter"></span></a></li>
-              <li><a href="#" class="linkedin"><span class="fa fa-linkedin"></span></a></li>
-            </ul>
-          </div>
+            <div class="blogs-grid" id="blogsGrid"></div>
+            <div id="pagination" class="pagination"></div>
         </div>
-      </div>
-    </div>
+    </section>
 
-    <!-- Bottom Bar -->
-    <div class="container-fluid px-0 py-4 bg-darken">
-      <div class="container-xl">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <p class="mb-0" style="font-size: 14px; color: #333;">
-              &copy;
-              <script>document.write(new Date().getFullYear());</script>
-              All rights reserved |
-              <span style="font-weight:600; color:#0779e4;">Faran Alam</span> –
-              <span style="color:#555;">Full Stack Developer</span> |
-              <a href="https://wa.me/923334051830" target="_blank" rel="noopener noreferrer"
-                style="color:#25D366; font-weight:600; text-decoration:none;">
-                WhatsApp
-              </a>
-            </p>
-          </div>
+    <!-- Detail Section -->
+    <section class="blog-detail-section" id="blogDetailSection">
+        <div class="blog-detail-container">
+            <div style="margin-bottom: 20px;">
+                <a href="#" onclick="backToGrid(event)" style="color: #007bff; text-decoration: none; font-weight: 600;">
+                    <i class="fas fa-arrow-left"></i> Back to All Blogs
+                </a>
+            </div>
+
+            <div>
+                <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                    <span class="blog-detail-category-badge" id="detailCategory">Technology</span>
+                    <span style="color: #999; font-size: 14px;" id="detailDate">Published date</span>
+                </div>
+                <h1 class="blog-detail-title" id="detailTitle">Blog Title</h1>
+                <div class="blog-detail-meta">
+                    <span><i class="fas fa-eye"></i> <span id="detailViews">0</span> views</span>
+                    <span><i class="fas fa-clock"></i> <span id="detailReadTime">5</span> min read</span>
+                    <span><i class="fas fa-user"></i> Faran Alam</span>
+                </div>
+            </div>
+
+            <img id="detailImage" src="" alt="Blog" class="blog-detail-image" style="display: none;">
+
+            <div class="blog-detail-content" id="detailContent">Loading...</div>
+
+            <div id="detailTagsSection" style="margin-bottom: 40px;"></div>
+
+            <div class="comments-section">
+                <h3 class="comments-title">💬 Comments</h3>
+
+                <div style="margin-bottom: 40px; padding-bottom: 40px; border-bottom: 2px solid #f0f0f0;">
+                    <h4 style="margin-bottom: 20px;">Leave a Comment</h4>
+                    <form id="commentForm" class="comment-form" onsubmit="submitComment(event)">
+                        <input type="text" id="commentName" placeholder="Your Name *" required maxlength="100">
+                        <input type="email" id="commentEmail" placeholder="Your Email *" required maxlength="200">
+                        <textarea id="commentText" placeholder="Your Comment *" rows="5" required maxlength="1000"></textarea>
+                        <button type="submit" class="submit-comment-btn">
+                            <i class="fas fa-paper-plane"></i> Post Comment
+                        </button>
+                    </form>
+                </div>
+
+                <div id="commentsList">
+                    <p style="text-align: center; color: #999;">No comments yet.</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </footer>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/tiny-slider.js"></script>
-  <script src="js/glightbox.min.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/typewritter.js"></script>
-  <script src="js/slideNav.min.js"></script>
-  <script src=""></script>
-  <script src="js/google-map.js"></script>
-  <script src="js/main.js"></script>
+    </section>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+    <!-- Footer -->
+    <footer style="background: #222; color: white; padding: 40px 20px; text-align: center;">
+        <p>&copy; 2026 Faran Alam. All rights reserved.</p>
+        <p style="font-size: 12px; opacity: 0.7;">Built with passion for web development</p>
+    </footer>
 
-    gtag('config', 'UA-23581568-13');
-  </script>
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317"
-    integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA=="
-    data-cf-beacon='{"rayId":"8315ff983a435f63","b":1,"version":"2023.10.0","token":"cd0b4b3a733644fc843ef0b185f98241"}'
-    crossorigin="anonymous"></script>
+    <script>
+        const API_BASE_URL = 'http://localhost:5000';
+        let allBlogs = [];
+        let filteredBlogs = [];
+        let currentPage = 1;
+        const blogsPerPage = 9;
+        let selectedBlogSlug = null;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const slug = localStorage.getItem('selectedBlogSlug');
+            if (slug) {
+                loadBlogDetail(slug);
+                localStorage.removeItem('selectedBlogSlug');
+            } else {
+                loadBlogs();
+            }
+        });
+
+        async function loadBlogs() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/blogs?limit=100`);
+                const data = await response.json();
+                allBlogs = data.blogs;
+                filteredBlogs = allBlogs;
+                setupFilters();
+                displayBlogs();
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('blogGridSection').style.display = 'block';
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function loadBlogDetail(slug) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/blogs/${slug}`);
+                const blog = await response.json();
+                selectedBlogSlug = slug;
+
+                document.title = blog.title + ' - Faran';
+                document.getElementById('detailTitle').textContent = blog.title;
+                document.getElementById('detailCategory').textContent = blog.category || 'Technology';
+                document.getElementById('detailDate').textContent = new Date(blog.createdAt).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+                document.getElementById('detailViews').textContent = blog.views || 0;
+                document.getElementById('detailReadTime').textContent = blog.readTime || 5;
+                document.getElementById('detailContent').innerHTML = blog.content;
+
+                if (blog.image) {
+                    document.getElementById('detailImage').src = blog.image;
+                    document.getElementById('detailImage').style.display = 'block';
+                }
+
+                if (blog.tags ? .length > 0) {
+                    document.getElementById('detailTagsSection').innerHTML = `
+                        <div class="blog-tags">
+                            ${blog.tags.map(tag => `<span class="blog-tag" onclick="searchByTag('${tag}')">#${tag}</span>`).join('')}
+                        </div>
+                    `;
+                }
+                
+                await loadComments(slug);
+                document.getElementById('blogGridSection').style.display = 'none';
+                document.getElementById('blogDetailSection').style.display = 'block';
+                window.scrollTo(0, 0);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function loadComments(slug) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/blogs/${slug}/comments`);
+                const comments = await response.json();
+                const approved = comments.filter(c => c.isApproved);
+                
+                const list = document.getElementById('commentsList');
+                if (approved.length === 0) {
+                    list.innerHTML = '<p style="text-align: center; color: #999;">No comments yet.</p>';
+                } else {
+                    list.innerHTML = approved.map(c => `
+                        <div class="comment-item">
+                            <div class="comment-author">${c.name}</div>
+                            <div class="comment-date">${new Date(c.createdAt).toLocaleDateString()}</div>
+                            <div>${c.comment}</div>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function submitComment(event) {
+            event.preventDefault();
+            try {
+                const response = await fetch(`${API_BASE_URL}/blogs/${selectedBlogSlug}/comments`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: document.getElementById('commentName').value,
+                        email: document.getElementById('commentEmail').value,
+                        comment: document.getElementById('commentText').value
+                    })
+                });
+                if (response.ok) {
+                    alert('Thank you! Your comment is pending approval.');
+                    document.getElementById('commentForm').reset();
+                    await loadComments(selectedBlogSlug);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        function setupFilters() {
+            const categories = new Set(allBlogs.map(b => b.category || 'Technology'));
+            let html = '<button class="filter-btn active" onclick="filterByCategory(\'all\')">All</button>';
+            categories.forEach(cat => {
+                html += `<button class="filter-btn" onclick="filterByCategory('${cat}')">${cat}</button>`;
+            });
+            document.getElementById('filterSection').innerHTML = html;
+        }
+
+        function filterByCategory(category) {
+            currentPage = 1;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            filteredBlogs = category === 'all' ? allBlogs : allBlogs.filter(b => (b.category || 'Technology') === category);
+            displayBlogs();
+        }
+
+        function searchBlogs() {
+            const term = document.getElementById('searchInput').value.toLowerCase().trim();
+            currentPage = 1;
+            filteredBlogs = term === '' ? allBlogs : allBlogs.filter(b =>
+                b.title.toLowerCase().includes(term) ||
+                b.excerpt?.toLowerCase().includes(term) ||
+                b.tags?.some(t => t.toLowerCase().includes(term))
+            );
+            displayBlogs();
+        }
+
+        function displayBlogs() {
+            const start = (currentPage - 1) * blogsPerPage;
+            const blogs = filteredBlogs.slice(start, start + blogsPerPage);
+            
+            document.getElementById('blogsGrid').innerHTML = blogs.map(blog => `
+                <div class="blog-card">
+                    <img src="${blog.image}" alt="${blog.title}" class="blog-card-image">
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span class="blog-card-category">${blog.category || 'Technology'}</span>
+                            <span>${blog.views || 0} views</span>
+                        </div>
+                        <h3 class="blog-card-title">
+                            <a href="#" onclick="viewBlog('${blog.slug}', event)">${blog.title}</a>
+                        </h3>
+                        ${blog.tags?.length > 0 ? `
+                            <div class="blog-tags">
+                                ${blog.tags.slice(0, 3).map(t => `<span class="blog-tag">#${t}</span>`).join('')}
+                            </div>
+                        ` : ''}
+                        <p class="blog-card-excerpt">${blog.excerpt || blog.title}</p>
+                        <div class="blog-card-footer">
+                            <div class="blog-card-info">
+                                <i class="fas fa-calendar"></i> ${new Date(blog.createdAt).toLocaleDateString()}<br>
+                                <i class="fas fa-clock"></i> ${blog.readTime || 5} min
+                            </div>
+                            <a href="#" class="blog-card-btn" onclick="viewBlog('${blog.slug}', event)">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            displayPagination();
+        }
+
+        function displayPagination() {
+            const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
+            if (totalPages <= 1) {
+                document.getElementById('pagination').innerHTML = '';
+                return;
+            }
+            
+            let html = `<button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}><i class="fas fa-chevron-left"></i> Prev</button>`;
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+            }
+            html += `<button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next <i class="fas fa-chevron-right"></i></button>`;
+            document.getElementById('pagination').innerHTML = html;
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            displayBlogs();
+            window.scrollTo(0, 0);
+        }
+
+        function viewBlog(slug, event) {
+            event.preventDefault();
+            loadBlogDetail(slug);
+        }
+
+        function backToGrid(event) {
+            event.preventDefault();
+            document.getElementById('blogGridSection').style.display = 'block';
+            document.getElementById('blogDetailSection').style.display = 'none';
+            document.title = 'Faran - Blog';
+            window.scrollTo(0, 0);
+        }
+
+        function searchByTag(tag) {
+            document.getElementById('searchInput').value = `#${tag}`;
+            backToGrid(event);
+            searchBlogs();
+        }
+
+        document.getElementById('searchInput')?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') searchBlogs();
+        });
+    </script>
 </body>
-
-<!-- Mirrored from preview.colorlib.com/theme/knuford/blog-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Dec 2023 16:46:03 GMT -->
 
 </html>
