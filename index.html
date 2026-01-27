@@ -1027,8 +1027,8 @@
 
         async function loadHomePageBlogs() {
             try {
-                console.log('Fetching from: http://localhost:5000/blogs?limit=6');
-                const response = await fetch('http://localhost:5000/blogs?limit=6');
+                console.log('Fetching from: https://faranalam-backend-portfolio.onrender.com/blogs?limit=6');
+                const response = await fetch('https://faranalam-backend-portfolio.onrender.com/blogs?limit=6');
                 console.log('Response status:', response.status, response.ok);
 
                 if (!response.ok) throw new Error('Failed to load blogs');
@@ -1128,7 +1128,7 @@
                         submitBtn.disabled = true;
                         submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Sending...';
 
-                        const response = await fetch('http://localhost:5000/contact', {
+                        const response = await fetch('https://faranalam-backend-portfolio.onrender.com/contact', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -1708,7 +1708,7 @@
 
     <script>
         (function() {
-            const API_BASE = window.CONTACT_API || "http://localhost:5000";
+            const API_BASE = window.CONTACT_API || "https://faranalam-backend-portfolio.onrender.com";
             const notificationEl = document.getElementById("notification");
 
             const showNotification = (message, type = "info") => {

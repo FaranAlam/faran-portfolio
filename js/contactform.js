@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Get form values
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
-        const subject = document.getElementById('subject') ? .value.trim() || '';
+        const subject = document.getElementById('subject')?.value.trim() || '';
         const message = document.getElementById('message').value.trim();
 
         console.log('Form values:', { name, email, subject, message });
@@ -63,8 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Get button elements
         const btn = document.getElementById('contact-submit-btn');
-        const btnText = btn ? .querySelector('.btn-text');
-        const btnLoading = btn ? .querySelector('.btn-loading');
+        const btnText = btn?.querySelector('.btn-text');
+        const btnLoading = btn?.querySelector('.btn-loading');
 
         // Show loading state
         if (btn) btn.disabled = true;
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         try {
             console.log('Sending fetch request to backend...');
-            const res = await fetch('http://localhost:5000/contact', {
+            const res = await fetch('https://faranalam-backend-portfolio.onrender.com/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, subject, message })
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await res.json();
 
             if (!res.ok) {
-                throw new Error(data ? .message || 'Failed to send message');
+                throw new Error(data?.message || 'Failed to send message');
             }
 
             // Show success message
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             this.reset();
 
             // Scroll to notification
-            document.getElementById('formNotification') ? .scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            document.getElementById('formNotification')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
         } catch (err) {
             showNotification(err.message || 'Failed to send message. Please try again.', 'error');

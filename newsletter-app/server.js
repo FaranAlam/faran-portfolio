@@ -109,7 +109,7 @@ const transporter = createTransporter();
 
 // ==================== JWT Middleware ====================
 const verifyToken = (req, res, next) => {
-    const token = req.headers.authorization ? .split(" ")[1];
+    const token = req.headers.authorization?.split(" ")[1];
 
     if (!token) {
         return res.status(401).json({ message: "No token provided. Access denied." });
@@ -171,7 +171,7 @@ app.get("/smtp-check", async(_req, res) => {
         await transporter.verify();
         return res.status(200).json({ configured: true, message: "SMTP is ready" });
     } catch (err) {
-        return res.status(500).json({ configured: true, message: "SMTP verify failed", error: err ? .message });
+        return res.status(500).json({ configured: true, message: "SMTP verify failed", error: err?.message });
     }
 });
 

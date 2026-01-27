@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:5000';
+const API_BASE = 'https://faranalam-backend-portfolio.onrender.com';
 const JWT_TOKEN = localStorage.getItem('adminToken');
 
 // DOM Elements

@@ -1,5 +1,5 @@
 // Admin Dashboard JavaScript
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'https://faranalam-backend-portfolio.onrender.com';
 let authToken = null;
 let currentPage = 1;
 let currentTab = 'contacts';
@@ -19,7 +19,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // Login Form Handler
-document.getElementById('loginForm') ? .addEventListener('submit', async(e) => {
+document.getElementById('loginForm')?.addEventListener('submit', async(e) => {
     e.preventDefault();
 
     const email = document.getElementById('email').value.trim();
@@ -703,7 +703,7 @@ function resetBlogEditor() {
 }
 
 // Image Upload
-document.getElementById('blogImage') ? .addEventListener('change', async(e) => {
+document.getElementById('blogImage')?.addEventListener('change', async(e) => {
     const file = e.target.files[0];
 
     if (!file) return;
