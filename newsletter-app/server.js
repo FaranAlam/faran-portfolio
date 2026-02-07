@@ -30,8 +30,16 @@ const CONTACT_TO = process.env.CONTACT_TO || "";
 const JWT_SECRET = process.env.JWT_SECRET || "your-super-secret-jwt-key-change-in-production";
 const JWT_EXPIRE = process.env.JWT_EXPIRE || "7d";
 
+// Trust proxy for Render deployment
+app.set('trust proxy', 1);
+
 app.use(helmet());
-app.use(cors({ origin: allowedOrigin === "*" ? true : allowedOrigin.split(","), credentials: true }));
+app.use(cors({
+    origin: true,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(bodyParser.json());
 
 const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
@@ -159,7 +167,45 @@ const upload = multer({
 
 // ==================== Public Health Endpoints ====================
 app.get("/health", (_req, res) => {
-    res.json({ status: "ok", db: mongoose.connection.readyState });
+    const dbState = mongoose.connection.readyState;
+    const dbStatus = {
+        0: 'disconnected',
+        1: 'connected',
+        2: 'connecting',
+        3: 'disconnecting'
+    };
+    res.json({
+        status: "ok",
+        database: dbStatus[dbState] || 'unknown',
+        dbReadyState: dbState,
+        mongoConnected: dbState === 1
+    });
+});
+
+app.get("/db-check", async(_req, res) => {
+    try {
+        const dbState = mongoose.connection.readyState;
+        if (dbState !== 1) {
+            return res.status(503).json({
+                connected: false,
+                message: "Database not connected",
+                state: dbState
+            });
+        }
+        // Try a simple query to verify database is working
+        const count = await Subscriber.countDocuments();
+        return res.json({
+            connected: true,
+            message: "Database is connected and working",
+            subscribersCount: count
+        });
+    } catch (err) {
+        return res.status(500).json({
+            connected: false,
+            message: "Database connection test failed",
+            error: err.message
+        });
+    }
 });
 
 app.get("/smtp-check", async(_req, res) => {
@@ -167,11 +213,20 @@ app.get("/smtp-check", async(_req, res) => {
         return res.status(200).json({ configured: false, message: "SMTP not configured" });
     }
     try {
-        // verify checks the connection configuration
-        await transporter.verify();
+        // Add timeout to prevent hanging
+        const verifyPromise = transporter.verify();
+        const timeoutPromise = new Promise((_, reject) =>
+            setTimeout(() => reject(new Error('SMTP verification timeout')), 10000)
+        );
+
+        await Promise.race([verifyPromise, timeoutPromise]);
         return res.status(200).json({ configured: true, message: "SMTP is ready" });
     } catch (err) {
-        return res.status(500).json({ configured: true, message: "SMTP verify failed", error: err?.message });
+        return res.status(500).json({
+            configured: true,
+            message: "SMTP verify failed",
+            error: err?.message || err.toString()
+        });
     }
 });
 
@@ -223,35 +278,48 @@ app.post("/admin/login", authLimiter, async(req, res) => {
 });
 
 app.post("/subscribe", subscribeLimiter, async(req, res) => {
+    console.log("[Subscribe] Received request body:", req.body);
+    console.log("[Subscribe] Request headers:", req.headers);
+
+    if (!req.body || !req.body.email) {
+        console.log("[Subscribe] No email in request body");
+        return res.status(400).json({ message: "Email is required." });
+    }
+
     const email = sanitizeInput(req.body.email, 255).toLowerCase();
+    console.log("[Subscribe] Sanitized email:", email);
+
     if (!isValidEmail(email)) {
-        return res.status(400).json({ message: "Please provide a valid email." });
+        console.log("[Subscribe] Invalid email format:", email);
+        return res.status(400).json({ message: "Please provide a valid email address." });
     }
     try {
         const existing = await Subscriber.findOne({ email });
         if (existing) {
+            console.log("[Subscribe] Email already exists:", email);
             return res.status(400).json({ message: "You are already subscribed!" });
         }
         await Subscriber.create({ email });
+        console.log("[Subscribe] New subscriber:", email);
 
+        // Send welcome email asynchronously (don't wait for it)
         if (transporter) {
-            try {
-                await transporter.sendMail({
-                    from: process.env.SMTP_FROM || process.env.SMTP_USER,
-                    to: email,
-                    subject: "Thanks for subscribing!",
-                    html: `<p>Hi there,</p><p>Thanks for subscribing to my newsletter. You'll hear from me soon!</p>`,
-                });
-            } catch (err) {
+            transporter.sendMail({
+                from: process.env.SMTP_FROM || process.env.SMTP_USER,
+                to: email,
+                subject: "Thanks for subscribing!",
+                html: `<p>Hi there,</p><p>Thanks for subscribing to my newsletter. You'll hear from me soon!</p>`,
+            }).catch(err => {
                 console.error("Failed to send welcome email", err.message);
-            }
+            });
         } else {
             console.log("[Newsletter] SMTP not configured. Skipping welcome email for:", email);
         }
 
-        return res.json({ message: "Subscription successful!" });
+        // Respond immediately without waiting for email
+        return res.json({ message: "Subscription successful! Check your email." });
     } catch (err) {
-        console.error(err);
+        console.error("[Subscribe] Error:", err.message);
         return res.status(500).json({ message: "Something went wrong. Please try again." });
     }
 });
@@ -312,12 +380,14 @@ app.post("/blogs", verifyToken, async(req, res) => {
 });
 
 app.post("/contact", contactLimiter, async(req, res) => {
+    console.log("[Contact] Received request:", { name: req.body.name, email: req.body.email });
     const name = sanitizeInput(req.body.name, 120);
     const email = sanitizeInput(req.body.email, 255);
     const subject = sanitizeInput(req.body.subject, 200) || "New Contact Form Submission";
     const message = sanitizeInput(req.body.message, 2000);
 
     if (!isValidEmail(email)) {
+        console.log("[Contact] Invalid email:", email);
         return res.status(400).json({ message: "Please provide a valid email." });
     }
     if (!message) {
@@ -341,6 +411,7 @@ app.post("/contact", contactLimiter, async(req, res) => {
             userAgent,
             status: "unread"
         });
+        console.log("[Contact] Message saved:", contactEntry._id);
 
         // Send email notification if SMTP is configured
         if (transporter) {
@@ -867,6 +938,17 @@ app.delete("/admin/comments/:id", verifyToken, async(req, res) => {
 
 // Serve uploaded images
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Global error handler
+app.use((err, req, res, next) => {
+    console.error("[Error]", err.message);
+    res.status(500).json({ message: "Server error. Please try again later." });
+});
+
+// 404 handler
+app.use((req, res) => {
+    res.status(404).json({ message: "Endpoint not found" });
+});
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
