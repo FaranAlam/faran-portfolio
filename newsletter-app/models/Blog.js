@@ -28,11 +28,13 @@ const blogSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        required: true
+        required: false,
+        default: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23ddd" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%23999" font-size="20"%3ENo Image%3C/text%3E%3C/svg%3E'
     },
     imageAlt: {
         type: String,
-        maxlength: 200
+        maxlength: 200,
+        default: 'Blog image'
     },
     tags: [{
         type: String,
