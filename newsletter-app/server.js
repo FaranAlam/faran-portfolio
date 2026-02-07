@@ -40,7 +40,7 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "10mb" }));
 
 const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
 const contactLimiter = rateLimit({ windowMs: 10 * 60 * 1000, max: 20 });
@@ -375,6 +375,9 @@ app.post("/blogs", verifyToken, async(req, res) => {
         return res.status(201).json({ message: "Blog created successfully!", blog });
     } catch (err) {
         console.error("[Create Blog] Error:", err);
+        if (err && err.code === 11000) {
+            return res.status(409).json({ message: "A blog with this title already exists." });
+        }
         return res.status(500).json({ message: "Failed to create blog." });
     }
 });
