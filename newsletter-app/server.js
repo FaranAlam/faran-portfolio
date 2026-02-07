@@ -723,7 +723,17 @@ app.post("/admin/blogs", verifyToken, async(req, res) => {
         });
     } catch (err) {
         console.error("[Create Blog] Error:", err);
-        return res.status(500).json({ message: "Failed to create blog." });
+        if (err && err.code === 11000) {
+            return res.status(409).json({ message: "A blog with this title already exists." });
+        }
+        if (err && err.name === "ValidationError") {
+            const details = Object.values(err.errors || {}).map((e) => e.message);
+            return res.status(400).json({ message: "Validation failed.", details });
+        }
+        return res.status(500).json({
+            message: "Failed to create blog.",
+            error: err?.message || "Unknown error"
+        });
     }
 });
 
