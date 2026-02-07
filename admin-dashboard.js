@@ -502,7 +502,7 @@ function formatDate(dateString) {
 
 // ==================== Blog Management ====================
 
-// Load Blogs
+// Load Blogs (API version)
 async function loadBlogs(page = 1) {
     currentPage = page;
 
@@ -554,42 +554,54 @@ function displayBlogs(blogs) {
     `).join('');
 }
 
-// Save Blog
+// Save Blog (API version with image upload)
 async function saveBlog() {
     const title = document.getElementById('blogTitle').value.trim();
     const content = document.getElementById('blogContent').value.trim();
-    const image = document.getElementById('blogImage').dataset.url || '';
+    const imageFile = document.getElementById('blogImage').files[0];
 
-    if (!title || !content || !image) {
-        alert('Please fill in all required fields and upload an image');
+    if (!title || !content) {
+        alert('Please fill in all required fields (Title and Content)');
         return;
     }
 
     const tagsString = document.getElementById('blogTags').value;
     const tags = tagsString ? tagsString.split(',').map(t => t.trim()).filter(t => t) : [];
 
-    const blogData = {
-        title,
-        content,
-        excerpt: document.getElementById('blogExcerpt').value.trim() || undefined,
-        image,
-        imageAlt: document.getElementById('blogImageAlt').value.trim() || undefined,
-        category: document.getElementById('blogCategory').value.trim() || 'Technology',
-        tags,
-        featured: document.getElementById('blogFeatured').checked,
-        published: document.getElementById('blogPublished').checked,
-        seoTitle: document.getElementById('blogSeoTitle').value.trim() || undefined,
-        seoDescription: document.getElementById('blogSeoDescription').value.trim() || undefined
-    };
-
-    const blogId = document.getElementById('blogEditorContainer').dataset.editId;
-
     try {
-        const method = blogId ? 'PUT' : 'POST';
-        const url = blogId ? `${API_BASE_URL}/admin/blogs/${blogId}` : `${API_BASE_URL}/admin/blogs`;
+        // Convert image to base64 if provided
+        let imageData = null;
+        if (imageFile) {
+            imageData = await new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve(e.target.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(imageFile);
+            });
+        }
 
-        const response = await fetch(url, {
-            method,
+        const blogData = {
+            title,
+            content,
+            excerpt: document.getElementById('blogExcerpt').value.trim(),
+            category: document.getElementById('blogCategory').value.trim() || 'Technology',
+            tags,
+            featured: document.getElementById('blogFeatured').checked,
+            published: document.getElementById('blogPublished').checked,
+            seoTitle: document.getElementById('blogSeoTitle').value.trim(),
+            seoDescription: document.getElementById('blogSeoDescription').value.trim(),
+            imageAlt: document.getElementById('blogImageAlt').value.trim(),
+            image: imageData // Include image as base64 string or null
+        };
+
+        const blogId = document.getElementById('blogEditorContainer').dataset.editId;
+        const endpoint = blogId 
+            ? `${API_BASE_URL}/admin/blogs/${blogId}` 
+            : `${API_BASE_URL}/admin/blogs`;
+        const method = blogId ? 'PUT' : 'POST';
+
+        const response = await fetch(endpoint, {
+            method: method,
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${authToken}`
@@ -597,9 +609,10 @@ async function saveBlog() {
             body: JSON.stringify(blogData)
         });
 
+        const data = await response.json();
+
         if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message || 'Failed to save blog');
+            throw new Error(data.message || 'Failed to save blog');
         }
 
         alert(blogId ? 'Blog updated successfully!' : 'Blog created successfully!');
@@ -608,23 +621,21 @@ async function saveBlog() {
 
     } catch (error) {
         console.error('Save blog error:', error);
-        alert(error.message || 'Failed to save blog');
+        alert('Failed to save blog: ' + error.message);
     }
 }
 
-// Edit Blog
+// Edit Blog (API version)
 async function editBlog(blogId) {
     try {
-        const response = await fetch(`${API_BASE_URL}/admin/blogs?page=1&limit=100`, {
+        const response = await fetch(`${API_BASE_URL}/admin/blogs/${blogId}`, {
             headers: { 'Authorization': `Bearer ${authToken}` }
         });
 
         if (!response.ok) throw new Error('Failed to load blog');
 
         const data = await response.json();
-        const blog = data.blogs.find(b => b._id === blogId);
-
-        if (!blog) throw new Error('Blog not found');
+        const blog = data.blog;
 
         // Populate form
         document.getElementById('blogTitle').value = blog.title;
@@ -641,11 +652,12 @@ async function editBlog(blogId) {
         const tagsString = blog.tags ? blog.tags.join(', ') : '';
         document.getElementById('blogTags').value = tagsString;
 
-        // Set image
-        document.getElementById('blogImage').dataset.url = blog.image;
-        const preview = document.getElementById('imagePreviewBlog');
-        preview.src = blog.image;
-        preview.style.display = 'block';
+        // Show image preview if exists
+        if (blog.image) {
+            const preview = document.getElementById('imagePreviewBlog');
+            preview.src = blog.image;
+            preview.style.display = 'block';
+        }
 
         // Mark as editing
         document.getElementById('blogEditorContainer').dataset.editId = blogId;
@@ -655,11 +667,11 @@ async function editBlog(blogId) {
 
     } catch (error) {
         console.error('Edit blog error:', error);
-        alert('Failed to load blog');
+        alert('Failed to load blog: ' + error.message);
     }
 }
 
-// Delete Blog
+// Delete Blog (API version)
 async function deleteBlog(blogId) {
     if (!confirm('Are you sure you want to delete this blog?')) {
         return;
@@ -678,7 +690,7 @@ async function deleteBlog(blogId) {
 
     } catch (error) {
         console.error('Delete blog error:', error);
-        alert('Failed to delete blog');
+        alert('Failed to delete blog: ' + error.message);
     }
 }
 
@@ -702,8 +714,8 @@ function resetBlogEditor() {
     document.getElementById('blogEditorContainer').removeAttribute('data-edit-id');
 }
 
-// Image Upload
-document.getElementById('blogImage')?.addEventListener('change', async(e) => {
+// Image Upload Handler
+document.getElementById('blogImage')?.addEventListener('change', (e) => {
     const file = e.target.files[0];
 
     if (!file) return;
@@ -727,32 +739,9 @@ document.getElementById('blogImage')?.addEventListener('change', async(e) => {
         const preview = document.getElementById('imagePreviewBlog');
         preview.src = event.target.result;
         preview.style.display = 'block';
+        console.log('✅ Image uploaded and ready');
     };
     reader.readAsDataURL(file);
-
-    // Upload image
-    const formData = new FormData();
-    formData.append('image', file);
-
-    try {
-        const response = await fetch(`${API_BASE_URL}/admin/blogs/upload`, {
-            method: 'POST',
-            headers: { 'Authorization': `Bearer ${authToken}` },
-            body: formData
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) throw new Error(data.message || 'Upload failed');
-
-        document.getElementById('blogImage').dataset.url = data.imageUrl;
-        console.log('✅ Image uploaded:', data.imageUrl);
-
-    } catch (error) {
-        console.error('Upload error:', error);
-        alert('Failed to upload image: ' + error.message);
-        document.getElementById('imagePreviewBlog').style.display = 'none';
-    }
 });
 
 function capitalize(str) {

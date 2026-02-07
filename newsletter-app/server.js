@@ -695,8 +695,8 @@ app.post("/admin/blogs/upload", verifyToken, upload.single('image'), async(req, 
 app.post("/admin/blogs", verifyToken, async(req, res) => {
     const { title, content, excerpt, image, imageAlt, tags, category, featured, published, seoTitle, seoDescription } = req.body;
 
-    if (!title || !content || !image) {
-        return res.status(400).json({ message: "Title, content, and image are required." });
+    if (!title || !content) {
+        return res.status(400).json({ message: "Title and content are required." });
     }
 
     try {
@@ -704,8 +704,8 @@ app.post("/admin/blogs", verifyToken, async(req, res) => {
             title: sanitizeInput(title, 200),
             content,
             excerpt: sanitizeInput(excerpt, 500),
-            image,
-            imageAlt: sanitizeInput(imageAlt, 200),
+            image: image || 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23ddd" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%23999" font-size="20"%3ENo Image%3C/text%3E%3C/svg%3E',
+            imageAlt: sanitizeInput(imageAlt, 200) || 'Blog image',
             tags: tags || [],
             category: sanitizeInput(category, 100) || 'Technology',
             featured: featured || false,
