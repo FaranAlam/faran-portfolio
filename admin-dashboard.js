@@ -1,5 +1,5 @@
 // Admin Dashboard JavaScript
-const API_BASE_URL = 'https://faranalam-backend-portfolio.onrender.com';
+const API_BASE_URL = 'http://localhost:3000';
 let authToken = null;
 let currentPage = 1;
 let currentTab = 'contacts';
@@ -612,6 +612,10 @@ async function saveBlog() {
         const data = await response.json();
 
         if (!response.ok) {
+            // Show validation details if available
+            if (data.details && Array.isArray(data.details)) {
+                throw new Error('Validation failed: ' + data.details.join(', '));
+            }
             throw new Error(data.message || 'Failed to save blog');
         }
 
