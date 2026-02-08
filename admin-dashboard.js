@@ -1,5 +1,13 @@
 // Admin Dashboard JavaScript
-const API_BASE_URL = 'http://localhost:3000';
+// API_BASE_URL is now loaded from config.js
+
+// DEBUG: Check if config.js loaded properly
+console.log('⚠️ DEBUG: window.API_BASE_URL =', window.API_BASE_URL);
+console.log('⚠️ DEBUG: window.location.hostname =', window.location.hostname);
+
+const API_BASE_URL = window.API_BASE_URL || 'http://localhost:3000';
+console.log('⚠️ DEBUG: Final API_BASE_URL =', API_BASE_URL);
+
 let authToken = null;
 let currentPage = 1;
 let currentTab = 'contacts';
@@ -34,6 +42,7 @@ document.getElementById('loginForm')?.addEventListener('submit', async(e) => {
     hideError();
 
     try {
+        console.log('⚠️ DEBUG: Attempting login to:', `${API_BASE_URL}/admin/login`);
         const response = await fetch(`${API_BASE_URL}/admin/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
