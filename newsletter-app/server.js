@@ -657,6 +657,25 @@ app.get("/blogs", async(req, res) => {
 });
 
 // Public: Get single blog by slug
+app.get("/blogs/id/:id", async(req, res) => {
+    try {
+        const blog = await Blog.findOne({ _id: req.params.id, published: true });
+
+        if (!blog) {
+            return res.status(404).json({ message: "Blog not found." });
+        }
+
+        // Increment views
+        blog.views = (blog.views || 0) + 1;
+        await blog.save();
+
+        return res.json(blog);
+    } catch (err) {
+        console.error("[Get Blog by ID] Error:", err);
+        return res.status(500).json({ message: "Failed to fetch blog." });
+    }
+});
+
 app.get("/blogs/:slug", async(req, res) => {
     try {
         const blog = await Blog.findOne({ slug: req.params.slug, published: true });

@@ -177,25 +177,31 @@
             // document.getElementById("navbar").style.background = "black";
 
             var element = document.getElementById("navbar");
-            element.classList.add("scroll");
+            if (element) {
+                element.classList.add("scroll");
+            }
         } else {
             var element = document.getElementById("navbar");
-            element.classList.remove("scroll");
+            if (element) {
+                element.classList.remove("scroll");
+            }
             // document.getElementById("navbar").style.background = "transparent";
         }
     }
 
 
     //TARGETED LINK
-    window.slide = new SlideNav({
-        activeClass: "activeme",
-        toggleButtonSelector: false,
-        toggleBoxSelector: false,
-        hideAfterSelect: true,
-        speed: 70,
-        changeHash: false,
-        navBoxToggleClass: false
-    });
+    if (typeof SlideNav !== 'undefined') {
+        window.slide = new SlideNav({
+            activeClass: "activeme",
+            toggleButtonSelector: false,
+            toggleBoxSelector: false,
+            hideAfterSelect: true,
+            speed: 70,
+            changeHash: false,
+            navBoxToggleClass: false
+        });
+    }
 
 
 
