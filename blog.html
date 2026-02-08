@@ -17,11 +17,19 @@
     <link rel="stylesheet" href="css/aos.css">
     
     <style>
+        /* Remove default body/html margins and padding */
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        
         /* Remove white line from navbar */
         .ftco-navbar-light {
             border-bottom: none !important;
             background-color: transparent !important;
             box-shadow: none !important;
+            margin: 0;
+            padding: 0;
         }
         
         .blog-card {
@@ -193,7 +201,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/blog bg img.webp');">
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/blog bg img.jpg');">
         <div class="overlay"></div>
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -411,7 +419,7 @@
             container.innerHTML = blogs.map(blog => `
                 <div class="col-md-4">
                     <div class="blog-card">
-                        <img src="${blog.image}" alt="${blog.imageAlt || blog.title}" onerror="this.src='images/blog-page-bg.jfif'">
+                        <img src="${blog.image}" alt="${blog.imageAlt || blog.title}" onerror="this.src='images/blog bg img.jpg'">
                         <div class="blog-content">
                             <span class="category" onclick="filterByCategory('${blog.category}')">${blog.category}</span>
                             <h3><a href="blog-detail.html?id=${blog._id}">${blog.title}</a></h3>
