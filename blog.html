@@ -23,13 +23,42 @@
             padding: 0;
         }
         
-        /* Remove white line from navbar */
+        /* Navbar styling - Blue background like main page */
         .ftco-navbar-light {
             border-bottom: none !important;
-            background-color: transparent !important;
-            box-shadow: none !important;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
+            box-shadow: 0 2px 10px rgba(0, 123, 255, 0.3);
             margin: 0;
             padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .ftco-navbar-light .navbar-brand {
+            color: white;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        
+        .ftco-navbar-light .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .ftco-navbar-light .navbar-nav .nav-link:hover,
+        .ftco-navbar-light .navbar-nav .nav-link.active {
+            color: #ffeb3b !important;
+        }
+        
+        .ftco-navbar-light .navbar-toggler {
+            border-color: white;
+        }
+        
+        .ftco-navbar-light .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
         
         .blog-card {
@@ -176,25 +205,82 @@
             height: 3rem;
             border-width: 0.3em;
         }
+        
+        /* Footer Social Media Icons Styling */
+        .ftco-footer-social {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .ftco-footer-social li {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .ftco-footer-social li a {
+            width: 45px;
+            height: 45px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #007bff;
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            font-size: 18px;
+            text-decoration: none;
+        }
+        
+        .ftco-footer-social li a:hover {
+            background: #0056b3;
+            transform: translateY(-5px);
+        }
+        
+        .ftco-footer-social li a.facebook:hover {
+            background: #3b5998;
+        }
+        
+        .ftco-footer-social li a.twitter:hover {
+            background: #1DA1F2;
+        }
+        
+        .ftco-footer-social li a.linkedin:hover {
+            background: #0077B5;
+        }
+        
+        .ftco-footer-social li a.GitHub:hover {
+            background: #333;
+        }
     </style>
 </head>
 
 <body>
     <!-- Header -->
-    <nav class="navbar navbar-expand-lg ftco-navbar-light" id="ftco-navbar">
-        <div class="container-xl">
-            <a class="navbar-brand d-flex align-items-center" href="index.html">
-                <span class="flaticon flaticon-businessman-paper-of-the-application-for-a-job"></span>
-                <span class="ms-2">Faran</span>
+    <nav class="navbar navbar-expand-lg fixed-top ftco-navbar-light" id="navbar">
+        <div class="container-fluid px-5">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="images/logo1.jpg" alt="Faran - Professional Web Developer" length="60px" height="60px" class="navbar-logo">
+                <span class="navbar-brand-text">Faran</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="fa fa-bars"></span>
-            </button>
+                <span class="fa fa-bars"></span>Menu</button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Work</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#technical-skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
