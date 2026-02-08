@@ -1019,6 +1019,21 @@
     </style>
 
     <script>
+        // INLINE CONFIG: Detect environment if config.js hasn't loaded yet
+        if (typeof window.API_BASE_URL === 'undefined') {
+            console.log('⚠️ WARNING: config.js not loaded, using inline configuration');
+            
+            const isLocalhost = window.location.hostname === 'localhost' || 
+                               window.location.hostname === '127.0.0.1' || 
+                               window.location.hostname.includes('192.168');
+            
+            window.API_BASE_URL = isLocalhost ? 
+                'http://localhost:3000' : 
+                'https://faran-portfolio-backend.onrender.com';
+            
+            console.log('🌐 Environment detected:', isLocalhost ? 'LOCAL' : 'PRODUCTION');
+        }
+        
         // Load latest blogs on homepage
         window.addEventListener('DOMContentLoaded', () => {
             console.log('DOM loaded, fetching blogs...');
@@ -1027,8 +1042,8 @@
 
         async function loadHomePageBlogs() {
             try {
-                console.log('Fetching from: https://faranalam-backend-portfolio.onrender.com/blogs?limit=6');
-                const response = await fetch('https://faranalam-backend-portfolio.onrender.com/blogs?limit=6');
+                console.log('Fetching from:', window.API_BASE_URL + '/blogs?limit=6');
+                const response = await fetch(window.API_BASE_URL + '/blogs?limit=6');
                 console.log('Response status:', response.status, response.ok);
 
                 if (!response.ok) throw new Error('Failed to load blogs');
@@ -1053,17 +1068,17 @@
                     html += `
                         <div class="col-md-6 d-flex mb-4" style="opacity: 1 !important; visibility: visible !important;">
                             <div class="blog-entry" style="opacity: 1 !important; visibility: visible !important; transform: none !important;">
-                                <a href="#" onclick="viewBlog('${escapeAttribute(blog.slug)}', event)" class="block-20 img" style="background-image: url('${escapeAttribute(blog.image)}');"></a>
+                                <a href="blog-detail.html?id=${blog._id}" class="block-20 img" style="background-image: url('${escapeAttribute(blog.image)}');"></a>
                                 <div class="text">
                                     <p class="meta">
                                         <span><i class="fa fa-calendar"></i>${formatDate(blog.createdAt)}</span>
                                         <span><i class="fa fa-clock"></i>${blog.readTime || 5} min read</span>
                                     </p>
                                     <h3 class="heading">
-                                        <a href="#" onclick="viewBlog('${escapeAttribute(blog.slug)}', event)">${escapeHtml(blog.title)}</a>
+                                        <a href="blog-detail.html?id=${blog._id}">${escapeHtml(blog.title)}</a>
                                     </h3>
                                     <p>${escapeHtml(blog.excerpt || blog.title)}</p>
-                                    <a href="#" onclick="viewBlog('${escapeAttribute(blog.slug)}', event)" class="blog-read-more">
+                                    <a href="blog-detail.html?id=${blog._id}" class="blog-read-more">
                                         Read More <i class="fas fa-arrow-right"></i>
                                     </a>
                                 </div>
@@ -1087,11 +1102,7 @@
             }
         }
 
-        function viewBlog(slug, event) {
-            event.preventDefault();
-            localStorage.setItem('selectedBlogSlug', slug);
-            window.location.href = 'blog-single.html';
-        }
+        // Function removed - using direct links to blog-detail.html now
 
         function escapeHtml(text) {
             const div = document.createElement('div');
@@ -1914,6 +1925,7 @@
             }
         })();
     </script>
+    <script src="js/config.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/tiny-slider.js"></script>
     <script src="js/glightbox.min.js"></script>

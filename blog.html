@@ -1,399 +1,420 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
-
-<!-- Mirrored from preview.colorlib.com/theme/knuford/blog-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Dec 2023 16:45:58 GMT -->
-
 <head>
-    <title>Faran</title>
-    <!-- Logo (favicon) add karne ka tag -->
+    <title>Blog - Faran Alam</title>
     <link rel="icon" type="image/jpg" href="images/logo1.jpg">
-    <link rel="stylesheet" href="css/style.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="contact.css">
+    
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com/">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/tiny-slider.css">
     <link rel="stylesheet" href="css/glightbox.min.css">
     <link rel="stylesheet" href="css/aos.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/contactform.css">
-    <script nonce="4ddf0da1-f60a-45d3-b284-87486e7b3bfa">
-        (function(w, d) {
-            ! function(j, k, l, m) {
-                j[l] = j[l] || {};
-                j[l].executed = [];
-                j.zaraz = {
-                    deferred: [],
-                    listeners: []
-                };
-                j.zaraz.q = [];
-                j.zaraz._f = function(n) {
-                    return async function() {
-                        var o = Array.prototype.slice.call(arguments);
-                        j.zaraz.q.push({
-                            m: n,
-                            a: o
-                        })
-                    }
-                };
-                for (const p of["track", "set", "debug"]) j.zaraz[p] = j.zaraz._f(p);
-                j.zaraz.init = () => {
-                    var q = k.getElementsByTagName(m)[0],
-                        r = k.createElement(m),
-                        s = k.getElementsByTagName("title")[0];
-                    s && (j[l].t = k.getElementsByTagName("title")[0].text);
-                    j[l].x = Math.random();
-                    j[l].w = j.screen.width;
-                    j[l].h = j.screen.height;
-                    j[l].j = j.innerHeight;
-                    j[l].e = j.innerWidth;
-                    j[l].l = j.location.href;
-                    j[l].r = k.referrer;
-                    j[l].k = j.screen.colorDepth;
-                    j[l].n = k.characterSet;
-                    j[l].o = (new Date).getTimezoneOffset();
-                    if (j.dataLayer)
-                        for (const w of Object.entries(Object.entries(dataLayer).reduce(((x, y) => ({...x[1],
-                                ...y[1]
-                            })), {}))) zaraz.set(w[0], w[1], {
-                            scope: "page"
-                        });
-                    j[l].q = [];
-                    for (; j.zaraz.q.length;) {
-                        const z = j.zaraz.q.shift();
-                        j[l].q.push(z)
-                    }
-                    r.defer = !0;
-                    for (const A of[localStorage, sessionStorage]) Object.keys(A || {}).filter((C => C.startsWith("_zaraz_"))).forEach((B => {
-                        try {
-                            j[l]["z_" + B.slice(7)] = JSON.parse(A.getItem(B))
-                        } catch {
-                            j[l]["z_" + B.slice(7)] = A.getItem(B)
-                        }
-                    }));
-                    r.referrerPolicy = "origin";
-                    r.src = "../../cdn-cgi/zaraz/sd0d9.js?z=" + btoa(encodeURIComponent(JSON.stringify(j[l])));
-                    q.parentNode.insertBefore(r, q)
-                };
-                ["complete", "interactive"].includes(k.readyState) ? zaraz.init() : j.addEventListener("DOMContentLoaded", zaraz.init)
-            }(w, d, "zarazData", "script");
-        })(window, document);
-    </script>
-    <script src="js/contactform.js"></script>
+    
+    <style>
+        .blog-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .blog-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .blog-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-content .category {
+            background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+            color: white;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: inline-block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .blog-content .category:hover {
+            transform: scale(1.05);
+        }
+        
+        .blog-content h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .blog-content h3 a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .blog-content h3 a:hover {
+            color: #007bff;
+        }
+        
+        .blog-content p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .blog-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #888;
+            flex-wrap: wrap;
+        }
+        
+        .blog-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .blog-meta i {
+            color: #007bff;
+        }
+        
+        .read-more {
+            background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+        
+        .category-filter {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .category-filter button {
+            background: white;
+            border: 2px solid #007bff;
+            color: #007bff;
+            padding: 10px 25px;
+            border-radius: 25px;
+            margin: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .category-filter button:hover,
+        .category-filter button.active {
+            background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+        
+        #loading {
+            text-align: center;
+            padding: 60px 0;
+        }
+        
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+            border-width: 0.3em;
+        }
+    </style>
 </head>
 
 <body>
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/blog-page-bg.jfif');">
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg ftco-navbar-light" id="ftco-navbar">
+        <div class="container-xl">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <span class="flaticon flaticon-businessman-paper-of-the-application-for-a-job"></span>
+                <span class="ms-2">Faran</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('+"'images/blog-page-bg.jfif');"+">
         <div class="overlay"></div>
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
                 <div class="col-md-9 pt-5 mt-5 text-center">
-                    <p class="breadcrumbs"><span class="me-2"><a href="index.html">Home <i
-                  class="fa fa-chevron-right"></i></a></span> <span class="me-2"><a href="#">Blog <i
-                  class="fa fa-chevron-right"></i></a></span> <span>Blog Single <i
-                class="fa fa-chevron-right"></i></span></p>
-                    <h1 class="mb-0 bread">Blog Details</h1>
+                    <p class="breadcrumbs">
+                        <span class="me-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span>
+                        <span>Blog <i class="fa fa-chevron-right"></i></span>
+                    </p>
+                    <h1 class="mb-0 bread">My Blog</h1>
+                    <p class="mt-3" style="color: white; font-size: 18px;">Insights, tutorials, and thoughts on web development</p>
                 </div>
             </div>
         </div>
     </section>
-    <section class="ftco-section">
+
+    <!-- Category Filter -->
+    <section class="pt-5">
         <div class="container">
-            <div class="row g-lg-5">
-                <div class="col-lg-12 blog-single">
-                    <h2 class="mb-3">📌 International Islamic University Islamabad</h2>
-                    <p>
-                        The <strong>International Islamic University, Islamabad (IIUI)</strong> is one of Pakistan’s leading institutions, known for its excellence in <em>Islamic studies, science,
-              technology, business, and social sciences</em>. It provides students with both modern education and Islamic values in a balanced academic environment.
-                    </p>
-
-                    <p>
-                        <img src="images/iiui.webp" alt="IIUI Campus" class="img-fluid">
-                    </p>
-
-                    <p>
-                        IIUI has a beautiful and modern campus located in Sector H-10, Islamabad. The university hosts thousands of students from across Pakistan and many other countries, promoting
-                        <strong>diversity, research, and innovation</strong>.
-                    </p>
-
-                    <h2 class="mb-3 mt-5">🎓 Faculties & Programs</h2>
-                    <p>
-                        IIUI offers a wide range of programs, including:
-                    </p>
-                    <ul>
-                        <li>Faculty of Engineering & Technology</li>
-                        <li>Faculty of Management Sciences</li>
-                        <li>Faculty of Islamic Studies</li>
-                        <li>Faculty of Social Sciences</li>
-                        <li>Faculty of Languages & Literature</li>
-                    </ul>
-
-                    <p>
-                        <img src="images/WW.jpeg" alt="IIUI Library" class="img-fluid">
-                    </p>
-
-                    <p>
-                        The university is also known for its <strong>Central Library</strong>, research centers, and vibrant student societies that encourage creativity and leadership.
-                    </p>
-
-                    <div class="tag-widget post-tag-container mb-5 mt-5">
-                        <div class="tagcloud">
-                            <a href="#" class="tag-cloud-link">IIUI</a>
-                            <a href="#" class="tag-cloud-link">Islamabad</a>
-                            <a href="#" class="tag-cloud-link">Education</a>
-                            <a href="#" class="tag-cloud-link">Engineering</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-author d-flex p-4 bg-light rounded">
-                    <div class="about-author d-flex p-4 bg-light rounded align-items-center">
-                        <!-- Left Side Profile Image -->
-                        <div class="author-pic me-md-4">
-                            <img src="images/author-pic.jpg" alt="Faran Alam" class="img-fluid rounded-circle">
-                        </div>
-
-                        <!-- Right Side Description -->
-                        <div class="desc">
-                            <h3>Faran Alam</h3>
-                            <p>
-                                I am a <strong>Computer Engineer</strong> and professional <strong>Full Stack Web Developer</strong>. Currently working on modern web technologies including React, Node.js, Express, MongoDB, and Laravel. Passionate about
-                                creating user-friendly and optimized web applications.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="pt-5 mt-5">
-                    <h3 class="mb-5" style="font-size: 34px;">3 Comments</h3>
-                    <ul class="comment-list">
-                        <li class="comment">
-                            <div class="vcard bio">
-                                <img src="images/comment-pic (2).jpg" alt="Image placeholder">
-                            </div>
-                            <div class="comment-body">
-                                <h3>Engr. Umer Hayat</h3>
-                                <div class="meta">March 15, 2024 at 09:30am</div>
-                                <p>Great blog post about IIUI 👏 Really helpful for new students!</p>
-                                <p><a href="#" class="reply">Reply</a></p>
-                            </div>
-                        </li>
-
-                        <li class="comment">
-                            <div class="vcard bio">
-                                <img src="images/comment-pic (1).jpg" alt="Image placeholder">
-                            </div>
-                            <div class="comment-body">
-                                <h3>Engr. Khizar Abass</h3>
-                                <div class="meta">March 16, 2024 at 02:15pm</div>
-                                <p>I studied at IIUI – amazing faculty and environment. Thanks for sharing!</p>
-                                <p><a href="#" class="reply">Reply</a></p>
-                            </div>
-                        </li>
-
-                        <li class="comment">
-                            <div class="vcard bio">
-                                <img src="images/comment-pic (3).jpg" alt="Image placeholder">
-                            </div>
-                            <div class="comment-body">
-                                <h3>Engr. Mohammad Khuzaifa</h3>
-                                <div class="meta">March 18, 2024 at 07:45pm</div>
-                                <p>Very informative content about IIUI. Keep writing more blogs 🙌</p>
-                                <p><a href="#" class="reply">Reply</a></p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="comment-form-wrap pt-5">
-                    <h3 class="mb-5" style="font-size: 34px;">Leave a comment</h3>
-                    <form action="#" class="p-4 p-lg-5 comment-form">
-                        <form id="contactForm" class="contactForm" action="https://formspree.io/f/xjkvrlqg" method="POST">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="name" id="name" placeholder="Name" required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <textarea name="message" class="form-control" id="message" cols="30" rows="4" placeholder="Create a message here" required></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="submit" value="Send Message" class="btn btn-primary">
-                                        <div class="submitting"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </form>
-                </div>
+            <div class="category-filter" id="categoryButtons">
+                <button class="active" onclick="filterByCategory('+"'all');"+">All</button>
             </div>
-        </div>
-        </div>
         </div>
     </section>
 
-    <div style="text-align: center; margin-top: 40px;">
-        <a href="index.html" class="back-btn">⬅ Back to Home</a>
-    </div><br><br>
-
-    <section class="ftco-intro py-5 bg-primary">
+    <!-- Blogs Grid -->
+    <section class="ftco-section pb-5">
         <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-lg-12">
-                    <div class="row g-lg-5">
-                        <div class="col-md-8 text-lg-right">
-                            <h2 class="mb-0">Newsletter - Stay tune and get the latest update</h2>
-                            <p>Let’s collaborate to bring your ideas to life. You can reach out through the contact on whatsApp or email me directly.</p>
-                        </div>
-                        <div class="col-md-4 border-left d-flex align-items-center">
-                            <form action="#" class="subscribe-form">
-                                <div class="form-group d-flex align-items-center">
-                                    <input type="text" class="form-control" placeholder="Enter email address">
-                                    <a href="#" class="btn-icon me-2"><span class="fa fa-paper-plane"></span></a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+            <!-- Loading Spinner -->
+            <div id="loading">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
                 </div>
+                <p class="mt-3">Loading blogs...</p>
+            </div>
+            
+            <!-- Blogs Container -->
+            <div class="row" id="blogContainer" style="display:none;">
+                <!-- Blogs will be loaded here by JavaScript -->
+            </div>
+
+            <!-- No Blogs Message -->
+            <div id="noBlogs" style="display:none; text-align:center; padding:40px;">
+                <i class="fas fa-book" style="font-size:60px; color:#ddd; margin-bottom:20px;"></i>
+                <h3>No blogs found</h3>
+                <p>Check back later for new content!</p>
             </div>
         </div>
     </section>
-    <footer class="ftco-footer">
+
+    <!-- Footer -->
+    <footer class="ftco-footer img" style="background-image: url(images/bg_3.jpg);">
+        <div class="overlay"></div>
         <div class="container-xl">
-            <div class="row mb-5 justify-content-between">
-                <!-- Logo & About -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2 logo d-flex">
-                            <a class="navbar-brand align-items-center">Faran</a>
-                        </h2>
-                        <p>
-                            I’m Faran, a Web Designer & Developer delivering reliable web solutions — from landing pages to full e-commerce stores since 2022.
-                        </p>
-
-                    </div>
-                </div>
-
-                <!-- Services -->
-                <div class="col-md-6 col-lg-2">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Services</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="#"><span class="fa fa-angle-right me-2"></span>Web Design</a></li>
-                            <li><a href="#"><span class="fa fa-angle-right me-2"></span>Web Development</a></li>
-                            <li><a href="#"><span class="fa fa-angle-right me-2"></span>Full Stack Development</a>
-                            </li>
-                            <li><a href="#"><span class="fa fa-angle-right me-2"></span>UI/UX Design</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Contact Info -->
+            <div class="row mb-5 pb-3 justify-content-between">
                 <div class="col-md-6 col-lg-3">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Have a Question?</h2>
+                        <h2 class="ftco-heading-2 logo d-flex">
+                            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                                <span class="flaticon flaticon-businessman-paper-of-the-application-for-a-job"></span>
+                                <span>Faran</span>
+                            </a>
+                        </h2>
+                        <p>Full Stack Web Developer passionate about creating amazing web experiences.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Quick Links</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="index.html"><span class="ion-ios-arrow-round-forward me-2"></span>Home</a></li>
+                            <li><a href="index.html#about"><span class="ion-ios-arrow-round-forward me-2"></span>About</a></li>
+                            <li><a href="blog.html"><span class="ion-ios-arrow-round-forward me-2"></span>Blog</a></li>
+                            <li><a href="index.html#contact"><span class="ion-ios-arrow-round-forward me-2"></span>Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Contact</h2>
                         <div class="block-23 mb-3">
                             <ul>
-                                <li>
-                                    <a href="https://www.google.com/maps?q=International+Islamic+University+Islamabad+H10+Pakistan" target="_blank" style="text-decoration:none; color:inherit;">
-                                        <span class="icon fa fa-map-marker"></span>
-                                        <span class="text">International Islamic University Islamabad (IIUI), H10,
-                      Islamabad, Pakistan</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://wa.me/923334051830" target="_blank">
-                                        <span class="icon fa fa-phone"></span>
-                                        <span class="text">+92 333 4051830</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="mailto:faranalam14203@gmail.com">
-                                        <span class="icon fa fa-envelope"></span>
-                                        <span class="text">faranalam14203@gmail.com</span>
-                                    </a>
-                                </li>
+                                <li><span class="icon fa fa-map marker"></span><span class="text">Islamabad, Pakistan</span></li>
+                                <li><span class="icon fa fa-phone"></span><span class="text">+92 333 4051830</span></li>
+                                <li><span class="icon fa fa-envelope"></span><span class="text">faran.bsce40@iiu.edu.pk</span></li>
                             </ul>
                         </div>
-
-                        <!-- Social Media -->
-                        <ul class="ftco-footer-social p-0">
-                            <li><a href="#" class="facebook"><span class="fa fa-facebook"></span></a></li>
-                            <li><a href="#" class="twitter"><span class="fa fa-twitter"></span></a></li>
-                            <li><a href="#" class="linkedin"><span class="fa fa-linkedin"></span></a></li>
-                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Bottom Bar -->
         <div class="container-fluid px-0 py-4 bg-darken">
             <div class="container-xl">
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <p class="mb-0" style="font-size: 14px; color: #333;">
-                            &copy;
-                            <script>
-                                document.write(new Date().getFullYear());
-                            </script>
-                            All rights reserved |
-                            <span style="font-weight:600; color:#0779e4;">Faran Alam</span> –
-                            <span style="color:#555;">Full Stack Developer</span> |
-                            <a href="https://wa.me/923334051830" target="_blank" rel="noopener noreferrer" style="color:#25D366; font-weight:600; text-decoration:none;">
-                WhatsApp
-              </a>
+                            &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | 
+                            <span style="font-weight:600; color:#0779e4;">Faran Alam</span>
                         </p>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/slideNav.min.js"></script>
     <script src="js/tiny-slider.js"></script>
     <script src="js/glightbox.min.js"></script>
     <script src="js/aos.js"></script>
-    <script src="js/typewritter.js"></script>
-    <script src="js/slideNav.min.js"></script>
-    <script src=""></script>
-    <script src="js/google-map.js"></script>
     <script src="js/main.js"></script>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
+        // INLINE CONFIG: Detect environment if config.js hasn't loaded yet
+        if (typeof window.API_BASE_URL === 'undefined') {
+            console.log('⚠️ WARNING: config.js not loaded, using inline configuration');
+            
+            const isLocalhost = window.location.hostname === 'localhost' || 
+                               window.location.hostname === '127.0.0.1' || 
+                               window.location.hostname.includes('192.168');
+            
+            window.API_BASE_URL = isLocalhost ? 
+                'http://localhost:3000' : 
+                'https://faran-portfolio-backend.onrender.com';
+            
+            console.log('🌐 Environment detected:', isLocalhost ? 'LOCAL' : 'PRODUCTION');
         }
-        gtag('js', new Date());
+        
+        let allBlogs = [];
+        let currentCategory = 'all';
 
-        gtag('config', 'UA-23581568-13');
+        // Fetch all blogs from API
+        async function loadBlogs() {
+            try {
+                const response = await fetch(window.API_BASE_URL + '/blogs');
+                const data = await response.json();
+                
+                // Handle both response formats: array or {blogs: array}
+                allBlogs = Array.isArray(data) ? data : (data.blogs || []);
+                
+                // Extract unique categories
+                const categories = [...new Set(allBlogs.map(blog => blog.category))];
+                
+                // Update category buttons
+                const categoryButtons = document.getElementById('categoryButtons');
+                categoryButtons.innerHTML = '<button class="active" onclick="filterByCategory(\'all\')">All</button>';
+                categories.forEach(cat => {
+                    categoryButtons.innerHTML += `<button onclick="filterByCategory('${cat}')">${cat}</button>`;
+                });
+                
+                displayBlogs(allBlogs);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('blogContainer').style.display = 'flex';
+            } catch (error) {
+                console.error('Error loading blogs:', error);
+                document.getElementById('loading').innerHTML = 
+                    '<p style="color:red;">Failed to load blogs. Make sure the server is running on localhost:3000</p>';
+            }
+        }
+
+        // Display blogs in grid
+        function displayBlogs(blogs) {
+            const container = document.getElementById('blogContainer');
+            const noBlogs = document.getElementById('noBlogs');
+            
+            if (!blogs || blogs.length === 0) {
+                container.style.display = 'none';
+                noBlogs.style.display = 'block';
+                return;
+            }
+            
+            container.style.display = 'flex';
+            noBlogs.style.display = 'none';
+            
+            container.innerHTML = blogs.map(blog => `
+                <div class="col-md-4">
+                    <div class="blog-card">
+                        <img src="${blog.image}" alt="${blog.imageAlt || blog.title}" onerror="this.src='images/blog-page-bg.jfif'">
+                        <div class="blog-content">
+                            <span class="category" onclick="filterByCategory('${blog.category}')">${blog.category}</span>
+                            <h3><a href="blog-detail.html?id=${blog._id}">${blog.title}</a></h3>
+                            <p>${blog.excerpt || blog.content.substring(0, 120)}...</p>
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar"></i> ${formatDate(blog.createdAt)}</span>
+                                <span><i class="far fa-eye"></i> ${blog.views || 0} views</span>
+                            </div>
+                            <a href="blog-detail.html?id=${blog._id}" class="read-more">See More </a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter blogs by category
+        function filterByCategory(category) {
+            currentCategory = category;
+            
+            // Update active button
+            document.querySelectorAll('.category-filter button').forEach(btn => {
+                btn.classList.remove('active');
+                if ((category === 'all' && btn.textContent === 'All') || 
+                    btn.textContent === category) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Filter blogs
+            if (category === 'all') {
+                displayBlogs(allBlogs);
+            } else {
+                const filtered = allBlogs.filter(blog => blog.category === category);
+                displayBlogs(filtered);
+            }
+        }
+
+        // Format date helper
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        // Load blogs when page loads
+        window.addEventListener('DOMContentLoaded', loadBlogs);
     </script>
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317" integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA==" data-cf-beacon='{"rayId":"8315ff983a435f63","b":1,"version":"2023.10.0","token":"cd0b4b3a733644fc843ef0b185f98241"}'
-        crossorigin="anonymous"></script>
 </body>
-
-<!-- Mirrored from preview.colorlib.com/theme/knuford/blog-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Dec 2023 16:46:03 GMT -->
-
 </html>
