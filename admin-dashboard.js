@@ -1,6 +1,21 @@
 // Admin Dashboard JavaScript
 // API_BASE_URL is now loaded from config.js
 
+// INLINE CONFIG: Detect environment if config.js hasn't loaded yet
+if (typeof window.API_BASE_URL === 'undefined') {
+    console.log('⚠️ WARNING: config.js not loaded, using inline configuration');
+    
+    const isLocalhost = window.location.hostname === 'localhost' || 
+                       window.location.hostname === '127.0.0.1' || 
+                       window.location.hostname.includes('192.168');
+    
+    window.API_BASE_URL = isLocalhost ? 
+        'http://localhost:3000' : 
+        'https://faran-portfolio-backend.onrender.com';
+    
+    console.log('🌐 Environment detected:', isLocalhost ? 'LOCAL' : 'PRODUCTION');
+}
+
 // DEBUG: Check if config.js loaded properly
 console.log('⚠️ DEBUG: window.API_BASE_URL =', window.API_BASE_URL);
 console.log('⚠️ DEBUG: window.location.hostname =', window.location.hostname);
