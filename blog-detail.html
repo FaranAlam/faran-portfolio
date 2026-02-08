@@ -16,6 +16,13 @@
     <link rel="stylesheet" href="css/aos.css">
     
     <style>
+        /* Remove white line from navbar */
+        .ftco-navbar-light {
+            border-bottom: none !important;
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+        
         .blog-detail-container {
             max-width: 900px;
             margin: 0 auto;
@@ -266,53 +273,92 @@
     </section>
 
     <!-- Footer -->
-    <footer class="ftco-footer img" style="background-image: url(images/bg_3.jpg);">
-        <div class="overlay"></div>
+    <footer class="ftco-footer">
         <div class="container-xl">
-            <div class="row mb-5 pb-3 justify-content-between">
-                <div class="col-md-6 col-lg-3">
+            <div class="row mb-5 justify-content-between">
+                <!-- Logo & About -->
+                <div class="col-md-6 col-lg-4">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2 logo d-flex">
-                            <a class="navbar-brand d-flex align-items-center" href="index.html">
-                                <span class="flaticon flaticon-businessman-paper-of-the-application-for-a-job"></span>
-                                <span>Faran</span>
-                            </a>
+                            <a class="navbar-brand align-items-center">Faran Alam</a>
                         </h2>
-                        <p>Full Stack Web Developer passionate about creating amazing web experiences.</p>
+                        <p>
+                            I’m Faran, a Web Designer & Developer delivering reliable web solutions — from landing pages to full e-commerce stores since 2022.
+                        </p>
+
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
+
+                <!-- Services -->
+                <div class="col-md-6 col-lg-2">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Quick Links</h2>
+                        <h2 class="ftco-heading-2">Services</h2>
                         <ul class="list-unstyled">
-                            <li><a href="index.html"><span class="ion-ios-arrow-round-forward me-2"></span>Home</a></li>
-                            <li><a href="index.html#about"><span class="ion-ios-arrow-round-forward me-2"></span>About</a></li>
-                            <li><a href="blog.html"><span class="ion-ios-arrow-round-forward me-2"></span>Blog</a></li>
-                            <li><a href="index.html#contact"><span class="ion-ios-arrow-round-forward me-2"></span>Contact</a></li>
+                            <li><a href="#"><span class="fa fa-angle-right me-2"></span>Web Design</a></li>
+                            <li><a href="#"><span class="fa fa-angle-right me-2"></span>Web Development</a></li>
+                            <li><a href="#"><span class="fa fa-angle-right me-2"></span>Full Stack Development</a>
+                            </li>
+                            <li><a href="#"><span class="fa fa-angle-right me-2"></span>UI/UX Design</a></li>
                         </ul>
                     </div>
                 </div>
+
+                <!-- Contact Info -->
                 <div class="col-md-6 col-lg-3">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Contact</h2>
+                        <h2 class="ftco-heading-2">Have a Question?</h2>
                         <div class="block-23 mb-3">
                             <ul>
-                                <li><span class="icon fa fa-map marker"></span><span class="text">Islamabad, Pakistan</span></li>
-                                <li><span class="icon fa fa-phone"></span><span class="text">+92 333 4051830</span></li>
-                                <li><span class="icon fa fa-envelope"></span><span class="text">faran.bsce40@iiu.edu.pk</span></li>
+                                <li>
+                                    <a href="https://www.google.com/maps?q=International+Islamic+University+Islamabad+H10+Pakistan" target="_blank" style="text-decoration:none; color:inherit;">
+                                        <span class="icon fa fa-map-marker"></span>
+                                        <span class="text">International Islamic University Islamabad (IIUI), H10,
+                                            Islamabad, Pakistan</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://wa.me/923334051830" target="_blank">
+                                        <span class="icon fa fa-phone"></span>
+                                        <span class="text">+92 333 4051830</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="mailto:faran.bsce40@iiu.edu.pk">
+                                        <span class="icon fa fa-envelope"></span>
+                                        <span class="text">faran.bsce40@iiu.edu.pk</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
+
+                        <!-- Social Media -->
+                        <ul class="ftco-footer-social p-0">
+                            <li><a href="https://www.facebook.com/share/1DcVGX8JVb/" target="_blank" rel="noopener noreferrer" class="facebook" title="Follow on Facebook"><span class="fa fa-facebook"></span></a></li>
+                            <li><a href="https://x.com/FaranAlam11?t=fS_Ril9o-g_LYgzJQ36dXA&s=08" target="_blank" rel="noopener noreferrer" class="twitter" title="Follow on Twitter"><span class="fa fa-twitter"></span></a></li>
+                            <li><a href="https://www.linkedin.com/in/faran-alam-14203abc" target="_blank" rel="noopener noreferrer" class="linkedin" title="Connect on LinkedIn"><span class="fa fa-linkedin"></span></a></li>
+                            <li><a href="https://github.com/FaranAlam" target="_blank" rel="noopener noreferrer" class="GitHub" title="Connect on GitHub"><span class="fa fa-github"></span></a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Bottom Bar -->
         <div class="container-fluid px-0 py-4 bg-darken">
             <div class="container-xl">
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <p class="mb-0" style="font-size: 14px; color: #333;">
-                            &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | 
-                            <span style="font-weight:600; color:#0779e4;">Faran Alam</span>
+                            &copy;
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            All rights reserved |
+                            <span style="font-weight:600; color:#0779e4;">Faran Alam</span> –
+                            <span style="color:#555;">Full Stack Developer, Computer Engineer</span> |
+                            <a href="https://wa.me/923334051830" target="_blank" rel="noopener noreferrer" style="color:#25D366; font-weight:600; text-decoration:none;">
+                                WhatsApp
+                            </a>
                         </p>
                     </div>
                 </div>
