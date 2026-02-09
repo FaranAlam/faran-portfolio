@@ -1624,9 +1624,19 @@
         });
 
         async function loadHomePageBlogs() {
+            const container = document.getElementById('blogContainer');
             try {
                 console.log('Fetching from:', window.API_BASE_URL + '/blogs?limit=6');
-                const response = await fetch(window.API_BASE_URL + '/blogs?limit=6');
+                
+                // Add timeout to fetch request (10 seconds)
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 10000);
+                
+                const response = await fetch(window.API_BASE_URL + '/blogs?limit=6', {
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+                
                 console.log('Response status:', response.status, response.ok);
 
                 if (!response.ok) throw new Error('Failed to load blogs');
@@ -1681,7 +1691,10 @@
                 }
             } catch (error) {
                 console.error('Error loading blogs:', error);
-                document.getElementById('blogContainer').innerHTML = '<div style="text-align: center; padding: 40px; width: 100%;"><p style="color: #999;">Unable to load blog posts. Server might be offline.</p></div>';
+                const errorMsg = error.name === 'AbortError' 
+                    ? '<div style="text-align: center; padding: 40px; width: 100%;"><p style="color: #999;">Server is waking up... Please <a href="javascript:location.reload()" style="color: #007bff;">refresh</a> the page in a moment.</p></div>'
+                    : '<div style="text-align: center; padding: 40px; width: 100%;"><p style="color: #999;">Unable to load blog posts. <a href="javascript:location.reload()" style="color: #007bff;">Refresh</a> to try again.</p></div>';
+                container.innerHTML = errorMsg;
             }
         }
 
