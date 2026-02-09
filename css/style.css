@@ -4905,35 +4905,66 @@ textarea.form-control {
     background: #e9e9e9 !important;
 }
 
+.ftco-footer-social {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
 .ftco-footer-social li {
     list-style: none;
-    margin: 0 5px 0 0;
-    display: inline-block;
+    margin: 0;
+    padding: 0;
 }
 
 .ftco-footer-social li a {
-    height: 40px;
-    width: 40px;
-    display: block;
-    color: #fff;
+    width: 45px;
+    height: 45px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #007bff;
+    color: white;
     border-radius: 50%;
-    position: relative;
-    background: #0779e4;
-}
-
-.ftco-footer-social li a span {
-    position: absolute;
-    font-size: 24px;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    color: #fff !important;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    text-decoration: none;
 }
 
 .ftco-footer-social li a:hover {
+    background: #0056b3;
+    transform: translateY(-5px);
+    color: white;
+}
+
+.ftco-footer-social li a span {
+    font-size: 18px;
     color: #fff !important;
+}
+
+.ftco-footer-social li a i {
+    font-size: 18px;
+    color: #fff !important;
+}
+
+.ftco-footer-social li a.facebook:hover {
+    background: #3b5998;
+}
+
+.ftco-footer-social li a.twitter:hover {
+    background: #1DA1F2;
+}
+
+.ftco-footer-social li a.linkedin:hover {
+    background: #0077B5;
+}
+
+.ftco-footer-social li a.GitHub:hover {
+    background: #333;
 }
 
 */ #map {
