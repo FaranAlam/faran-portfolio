@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 5px;
+            white-space: pre-wrap;
+        }
+        .loading {
+            color: #666;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Backend API Test</h1>
+    <p>Backend URL: <strong>https://faran-portfolio-backend.onrender.com</strong></p>
+    
+    <div>
+        <button onclick="testBackend()">Test Backend /blogs</button>
+        <button onclick="testHealth()">Test Health Check</button>
+        <button onclick="checkBlogCount()">Check Blog Count</button>
+    </div>
+    
+    <div id="result">Click a button to test the backend...</div>
+
+    <script>
+        const API_BASE_URL = 'https://faran-portfolio-backend.onrender.com';
+        
+        async function testBackend() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'loading';
+            resultDiv.textContent = 'Testing backend... Please wait (can take 50+ seconds if backend is sleeping)...';
+            
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 second timeout
+                
+                const response = await fetch(API_BASE_URL + '/blogs', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    },
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                resultDiv.className = 'success';
+                resultDiv.textContent = 'Success! Backend is working.\n\n' + 
+                    'Response:\n' + JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultDiv.className = 'error';
+                if (error.name === 'AbortError') {
+                    resultDiv.textContent = 'Error: Request timeout (60 seconds).\n\n' +
+                        'Backend is not responding. Possible issues:\n' +
+                        '1. Backend service is down on Render.com\n' +
+                        '2. Network connectivity problem\n' +
+                        '3. CORS issue\n\n' +
+                        'Try again or check the backend status on Render.com';
+                } else {
+                    resultDiv.textContent = 'Error: ' + error.message + '\n\n' +
+                        'Backend is not reachable. Check:\n' +
+                        '1. Is the backend deployed on Render.com?\n' +
+                        '2. Is the service running?\n' +
+                        '3. Check Render.com dashboard for errors';
+                }
+            }
+        }
+        
+        async function testHealth() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'loading';
+            resultDiv.textContent = 'Checking backend health...';
+            
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 30000);
+                
+                const response = await fetch(API_BASE_URL + '/health', {
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
+                const data = await response.json();
+                
+                resultDiv.className = 'success';
+                resultDiv.textContent = 'Backend is alive!\n\n' + 
+                    'Response:\n' + JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultDiv.className = 'error';
+                resultDiv.textContent = 'Error: ' + error.message + '\n\nBackend health check failed.';
+            }
+        }
+        
+        async function checkBlogCount() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'loading';
+            resultDiv.textContent = 'Fetching blogs...';
+            
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 60000);
+                
+                const response = await fetch(API_BASE_URL + '/blogs', {
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
+                const data = await response.json();
+                const blogs = data.blogs || [];
+                
+                resultDiv.className = 'success';
+                resultDiv.textContent = `Total blogs in database: ${blogs.length}\n\n` +
+                    'Blog titles:\n' +
+                    (blogs.length > 0 
+                        ? blogs.map((blog, i) => `${i + 1}. "${blog.title}" (Status: ${blog.status})`).join('\n')
+                        : 'No blogs found! Create blogs from admin dashboard first.');
+            } catch (error) {
+                resultDiv.className = 'error';
+                resultDiv.textContent = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
