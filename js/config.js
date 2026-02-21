@@ -17,7 +17,8 @@ const CONFIG = {
     }
 };
 
-// Export for use in other files
-window.API_BASE_URL = CONFIG.getApiUrl();
+// FORCE LOCAL FOR TESTING - Comment this out for production
+window.API_BASE_URL = 'http://localhost:3000';
+
 console.log('🌐 Environment:', CONFIG.isLocalhost ? 'LOCAL' : 'PRODUCTION');
 console.log('🔗 API URL:', window.API_BASE_URL);

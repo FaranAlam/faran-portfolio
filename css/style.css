@@ -3105,7 +3105,7 @@ textarea.form-control {
 
 #backToTop {
     position: fixed;
-    bottom: 25px;
+    bottom: 90px;
     right: 25px;
     background: #0d6efd;
     color: #fff;
@@ -3137,7 +3137,7 @@ textarea.form-control {
 
 #whatsappButton {
     position: fixed;
-    bottom: 90px;
+    bottom: 25px;
     right: 25px;
     background: #25D366;
     color: #fff;
@@ -3180,7 +3180,7 @@ textarea.form-control {
 
 @media (max-width: 768px) {
     #backToTop {
-        bottom: 20px;
+        bottom: 75px;
         right: 20px;
         padding: 10px 12px;
         font-size: 16px;
@@ -3188,7 +3188,7 @@ textarea.form-control {
         height: 45px;
     }
     #whatsappButton {
-        bottom: 75px;
+        bottom: 20px;
         right: 20px;
         font-size: 20px;
         width: 45px;
